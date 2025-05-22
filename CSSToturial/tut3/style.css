@@ -1,0 +1,22 @@
+.container{
+    color: red;
+    border: 5px solid black;
+    background-color: #c7f06c;
+    height: 20%;
+    width: 50%;
+    margin-top: 10%;
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-bottom: 10%;    
+}
+
+.subcontainer{
+    color: darkblue;
+    border: 5px solid black;
+    width: 20rem;
+    margin-top: 15%;
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-bottom: 10%;
+    background-color: aqua;
+}

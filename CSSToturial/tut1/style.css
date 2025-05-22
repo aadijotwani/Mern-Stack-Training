@@ -1,0 +1,17 @@
+.heading{
+    background-color: red;
+    color: white;
+}
+
+.subheading{
+    background-color: blueviolet;
+    color: rgb(243, 148, 148);
+
+}
+
+#outerdiv{
+    border: 1px solid #000;
+    width: 500px;
+}
+
+
