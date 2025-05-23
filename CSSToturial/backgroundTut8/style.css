@@ -1,0 +1,13 @@
+body {
+  background-image: url("an\ inspiring\ image\ for\ a\ college\ student\ aiming\ for\ a\ job\ at\ Google.png");
+  background-repeat: no-repeat;
+  background-position: top left;
+  background-position: top;
+  background-position: top right;
+  background-position: center;
+
+  background-position: 12px 12px;
+  background-size: contain;
+  background-size: cover;
+  background-attachment: local;
+}
