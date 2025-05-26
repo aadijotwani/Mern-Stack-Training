@@ -7,25 +7,243 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="header">
-      <div class="searchbar">
-        <div id="topimage"><img src="image.png" alt="" /></div>
+    <div class="pageAlignment">
+      <!--Header Top display----------------------------------->
+      <div class="header">
+        <!--Searchbar------------------------------------------>
+        <div class="searchbar">
+          <div id="topimage"><img src="./images/image.png" alt="" /></div>
+          <div class="textforSearch">
+            <div id="selectbox">
+              <label for="category"></label>
+              <select name="category" id="category">
+                <option value="">All Categories</option>
+                <option value="1">Groceries</option>
+              </select>
+            </div>
 
-        <div class="textforSearch">
-          <div id="selectbox">
-            <label for="category"></label>
-            <select name="category" id="category">
-              <option value="">All Categories</option>
-              <option value="1">Groceries</option>
-            </select>
+            <div class="search">
+              <input
+                type="text"
+                placeholder="Search for more than 20,000 products"
+                id="search"
+              />
+              <button type="submit" id="submit">🔍</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="support">
+          <div id="htext">For Support?</div>
+          <div id="phone">+980-34984089</div>
+        </div>
+
+        <div class="wishlist">
+          <div id="user">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="currentColor"
+              class="bi bi-person"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"
+              />
+            </svg>
+          </div>
+          <div id="heart">♡</div>
+        </div>
+
+        <div class="cart">
+          <div id="cartSelect">
+            <label for="cart">
+              <select name="cart" id="cart">
+                <option value="">Your Cart</option>
+              </select>
+            </label>
           </div>
 
-          <div class="search">
-            <input
-              type="text"
-              placeholder="Search for more than 20,000 products" id="search"
-            />
-            <button type="submit" id="submit">🔍</button>
+          <div id="amount">$1290.00</div>
+        </div>
+      </div>
+
+      <!--Department ------------------------------------------------->
+
+      <div class="department">
+        <div id="shop">
+          <label for="shopbydepartment"></label>
+          <select name="shopbydepartment" id="shopbydepartment">
+            <option value="">Shop by Department</option>
+          </select>
+        </div>
+
+        <div id="type">
+          <div><button class="type">Women</button></div>
+          <div><button class="type">Men</button></div>
+          <div><button class="type">Kids</button></div>
+          <div><button class="type">Accessories</button></div>
+          <div id="pagesOpt">
+            <select name="page" id="page">
+              <option value="">Pages</option>
+            </select>
+          </div>
+          <div><button class="type">Brand</button></div>
+          <div><button class="type">Sale</button></div>
+          <div><button class="type">Blog</button></div>
+        </div>
+      </div>
+
+      <!--Display Showcase for items------------------------------->
+
+      <div class="display">
+        <!--3 boxes flexed------------------------------->
+        <div class="box1">
+          <div id="box1text">
+            <h1>100% Natural</h1>
+            <span>
+              Fresh Smoothie &<br />
+              Summer Juice
+            </span>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissim
+              massa diam elementum.
+            </p>
+            <button>SHOP NOW</button>
+          </div>
+
+          <img src="./images/bottel1.png" alt="" id="bottle" />
+        </div>
+
+        <div class="boxcombo">
+          <div class="box2">
+            <div class="textbox">
+              <h2>20% Off</h2>
+
+              <div class="linesale">
+                <span>———————</span>
+                <div class="sales">&nbsp;S&nbsp;A&nbsp;L&nbsp;E</div>
+              </div>
+              <h3>Fruits & Vegetables</h3>
+              <div>
+                <button>
+                  <span>Shop Collection</span
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-arrow-right-short"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <img src="./images/fruitbag.png" alt="" />
+          </div>
+
+          <div class="box3">
+            <div class="textbox">
+              <h2>15% Off</h2>
+              <div class="linesale">
+                <span>———————</span>
+                <div class="sales">&nbsp;S&nbsp;A&nbsp;L&nbsp;E</div>
+              </div>
+              <h3>Baked Products</h3>
+              <div>
+                <button>
+                  <span>Shop Collection</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-arrow-right-short"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <img src="./images/bread.png" alt="" />
+          </div>
+        </div>
+      </div>
+
+      <!--Category Section----------------------------->
+
+      <div class="categorySection">
+        <div class="top">
+          <h2>Category</h2>
+          <div>
+            <span>View all Categories →</span>
+
+            
+            <button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-caret-left"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M10 12.796V3.204L4.519 8zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753"
+                />
+              </svg>
+            </button>
+            <button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-caret-right-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="Catmain">
+          <div class="catbox">
+            <img src="./images/broccli.png" alt="" />
+            <h2>Fruits and Vegas</h2>
+          </div>
+          <div class="catbox">
+            <img src="./images/breadsbox.png" alt="" />
+            <h2>Breads and Sweets</h2>
+          </div>
+          <div class="catbox">
+            <img src="./images/softdrinks.png" alt="" />
+            <h2>Fruits and Vegas</h2>
+          </div>
+          <div class="catbox">
+            <img src="./images/wine glass.png" alt="" />
+            <h2>Fruits and Vegas</h2>
+          </div>
+          <div class="catbox">
+            <img src="./images/meat.png" alt="" />
+            <h2>Fruits and Vegas</h2>
+          </div>
+          <div class="catbox">
+            <img src="./images/herbs.png" alt="" />
+            <h2>Fruits and Vegas</h2>
           </div>
         </div>
       </div>
