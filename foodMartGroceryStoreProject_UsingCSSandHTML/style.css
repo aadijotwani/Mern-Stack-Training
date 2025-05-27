@@ -333,21 +333,21 @@ body {
     top: 2.5rem;
     left: 8rem;
     right: 4px;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: light;
   }
   h3{
     position: absolute;
     left: 8rem;
     top: 7px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: lighter;
   }
 
   img{
     padding: 12px;
     position: absolute;
-    height: 65%;
+    height: 80%;
     width: auto;
     border-radius: 20px;
   }
