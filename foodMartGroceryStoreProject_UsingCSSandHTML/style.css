@@ -257,10 +257,10 @@ body {
   background-color: #f5ebe8;
 }
 
-.categorySection {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+.categorySection, .newarrivalsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .top {
@@ -276,7 +276,7 @@ body {
     font-size: 35px;
   }
 
-  button{
+  button {
     border: none;
     height: 37px;
     width: 42px;
@@ -291,28 +291,64 @@ body {
   }
 }
 
-.Catmain {
+.Catmain,
+.Newmain {
   display: flex;
   justify-content: space-evenly;
   gap: 24px;
-  h2{
+  h2 {
     font-family: sans-serif;
     font-weight: 100;
   }
+}
 
+.catbox {
+  width: 25%;
+  height: 25vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  background-color: rgba(191, 191, 191, 0.141);
+  box-shadow: 0.5px 0.5px 8px rgba(0, 0, 0, 0.299);
+}
+
+.Newbox {
+  width: 25%;
+  height: 13vh;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  background-color: rgba(191, 191, 191, 0.141);
+  box-shadow: 0.5px 0.5px 8px rgba(0, 0, 0, 0.299);
+  font-family: sans-serif;
+  position: relative;
+  color: rgb(93, 93, 93);
+
+
+  h1{
+    position: absolute;
+    top: 2.5rem;
+    left: 8rem;
+    right: 4px;
+    font-size: 20px;
+    font-weight: light;
+  }
+  h3{
+    position: absolute;
+    left: 8rem;
+    top: 7px;
+    font-size: 16px;
+    font-weight: lighter;
   }
 
-    .catbox {
-    width: 25%;
-    height: 25vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 15px;
-    background-color: rgba(191, 191, 191, 0.141);
-    box-shadow: 0.5px 0.5px 8px rgba(0, 0, 0, 0.299);
+  img{
+    padding: 12px;
+    position: absolute;
+    height: 65%;
+    width: auto;
+    border-radius: 20px;
   }
-
-  
-
+}
