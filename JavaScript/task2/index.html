@@ -1,11 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    
-</body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="box">
+      <div class="heading">
+        <h1 id="line">Lo</h1>
+        <h1>gin</h1>
+      </div>
+
+      <!--Detail Input section----------------------------------------------->
+      <div class="detailSec">
+        <div>
+          <label for="userid">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="30"
+              height="30"
+              fill="currentColor"
+              class="bi bi-person-fill"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"
+              />
+            </svg>
+          </label>
+          <input
+            type="email"
+            name="userid"
+            id="userid"
+            placeholder="Please enter your Email ID"
+          />
+        </div>
+
+        <div>
+          <label for="password">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="30"
+              height="30"
+              fill="currentColor"
+              class="bi bi-key"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8m4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5"
+              />
+              <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+            </svg>
+          </label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Please enter your Password"
+          />
+        </div>
+      </div>
+
+      <!--Remember me section----------------------------------------->
+
+      <div class="rememMeSec">
+        <div>
+          <input type="checkbox" name="rememberMe" id="rememberMe" />
+          Remember Me
+        </div>
+        <a href="">Forget Password</a>
+      </div>
+
+      <!--lOGIN button action----------------------------------------->
+
+      <div class="loginSec">
+        <button id="login" onclick="loginNow()">Login Now</button>
+        <div>
+          <span>Don't have an account?</span>
+          <a href="">Signup now</a>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
 </html>

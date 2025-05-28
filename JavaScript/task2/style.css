@@ -1,0 +1,133 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-image: url(image.png);
+  background-size: fill;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.box {
+  position: absolute;
+  width: 25%;
+  height: 30rem;
+  top: 17rem;
+  left: 38rem;
+  background-color: rgba(0, 0, 0, 0.711);
+  border-radius: 20px;
+  display: grid;
+  justify-content: center;
+  grid-template-rows: 10rem 8rem;
+
+  .heading {
+    display: flex;
+    margin-top: 8px;
+    background: linear-gradient(
+      to right,
+      rgb(89, 89, 247),
+      9rem,
+      rgb(213, 19, 213)
+    );
+    background-clip: text;
+    height: 6rem;
+
+    h1 {
+      margin: 0rem;
+      padding: 0rem;
+      font-size: 54px;
+      color: rgba(255, 255, 255, 0);
+    }
+
+    #line {
+      border-bottom: 4px solid white;
+      height: 55px;
+    }
+  }
+
+  .detailSec {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    height: fit-content;
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      border-bottom: 2px solid white;
+      color: rgba(45, 201, 233, 0.722);
+      width: 22rem;
+    }
+
+    input {
+      border: none;
+      background-color: rgba(255, 255, 255, 0);
+      font-size: 20px;
+      height: 100%;
+      width: 100%;
+    }
+
+    input::placeholder{
+        color: white;
+    }
+
+    input:focus {
+      color: white;
+      font-size: 16px;
+    }
+  }
+
+  .rememMeSec {
+    display: flex;
+    justify-content: space-between;
+    font-family: sans-serif;
+
+    div {
+      display: flex;
+      align-items: center;
+      height: fit-content;
+      gap: 2px;
+      color: rgba(255, 255, 255, 0.515);
+    }
+
+    a{
+        color: rgb(0, 221, 255);
+    }
+  }
+
+  .loginSec {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    button {
+      width: 20rem;
+      height: 3rem;
+      border-radius: 20px;
+      border: 1px solid white;
+      background-color: #ffffff00;
+      color: white;
+      font-size: 25px;
+    }
+
+    button:hover {
+      background-color: rgb(23, 123, 190);
+    }
+
+    span {
+      height: fit-content;
+      color: white;
+    }
+
+    a {
+      height: fit-content;
+      color: rgb(0, 221, 255);
+    }
+  }
+}
