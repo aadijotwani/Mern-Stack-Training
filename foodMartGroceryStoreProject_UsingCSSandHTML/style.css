@@ -257,7 +257,9 @@ body {
   background-color: #f5ebe8;
 }
 
-.categorySection, .newarrivalsSection {
+.categorySection,
+.newarrivalsSection,
+.trendingProducts {
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -327,8 +329,7 @@ body {
   position: relative;
   color: rgb(93, 93, 93);
 
-
-  h1{
+  h1 {
     position: absolute;
     top: 2.5rem;
     left: 8rem;
@@ -336,7 +337,7 @@ body {
     font-size: 16px;
     font-weight: light;
   }
-  h3{
+  h3 {
     position: absolute;
     left: 8rem;
     top: 7px;
@@ -344,11 +345,36 @@ body {
     font-weight: lighter;
   }
 
-  img{
+  img {
     padding: 12px;
     position: absolute;
     height: 80%;
     width: auto;
     border-radius: 20px;
+  }
+}
+
+.trendTop {
+  display: grid;
+  grid-template-columns: 25rem 17.1rem;
+  align-items: center;
+  justify-content: space-between;
+
+  h2 {
+    margin: 0;
+    font-family: sans-serif;
+    font-weight: 550;
+    font-size: 35px;
+  }
+
+  button {
+    height: 2.5rem;
+    font-size: 18px;
+    margin-left: 10px;
+    font-weight: lighter;
+    font-family: sans-serif;
+    color: rgb(61, 61, 61);
+    border: none;
+    background-color: white;
   }
 }
