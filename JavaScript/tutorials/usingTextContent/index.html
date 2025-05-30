@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="myDiv">
+      Hello <span style="display: none">World!</span> <br />
+      <!---------------line breaks-->
+      <span>I am </span> <br /> <span>Aadi</span>
+      <!--It considers <br> here as space-->
+
+      <span>I am </span>
+      <br />
+      <span>Aadi</span>
+      <!--It considers line breaker here because textContent considers line breaks if entered by the user-->
+      <!--It also ignores the <br> here and consider itself as an empty line and print that empty line in the console-->
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

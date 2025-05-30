@@ -28,9 +28,15 @@
       height: 1.5rem;
     }
 
+    button:hover{
+      
+    }
+
     #red {
       background-color: red;
     }
+
+
 
     #green {
       background-color: green;
