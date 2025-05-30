@@ -1,0 +1,15 @@
+.a{
+    background-color: aquamarine;
+}
+
+
+.b{
+    background-color: blueviolet;
+}
+
+
+.c{
+    background-color: chartreuse;
+    border: 1px solid #000;
+    border-radius: 50%;
+}
