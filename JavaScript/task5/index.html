@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="colorSystem">
+
+      <div class="bulb">
+
+        <div id="circle"></div>
+        <span>Bulb</span>
+
+      </div>
+
+      <div class="buttons">
+        <button onclick="bulbColor(value)" id="red"  value="red">RED</button>
+        <button onclick="bulbColor(value)" id="green" value="green">GREEN</button>
+        <button onclick="bulbColor(value)" id="blue" value="blue">BLUE</button>
+        <input type="color" onchange="bulbColor(value)" id="anyColor">
+      </div>
+
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+ 

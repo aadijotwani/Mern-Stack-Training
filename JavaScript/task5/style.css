@@ -1,0 +1,45 @@
+.colorSystem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rem;
+
+  .bulb {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+
+    #circle {
+      border: 1px solid black;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+    }
+  }
+
+
+
+  .buttons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+    button{
+        width: fit-content;
+        height: 1.5rem;
+    }
+
+    #red{
+        background-color: red;
+    }
+
+    #green{
+        background-color: green;
+    }
+
+    #blue{
+        background-color: rgb(57, 118, 239);
+    }
+  }
+}
