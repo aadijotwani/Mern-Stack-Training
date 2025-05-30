@@ -16,30 +16,27 @@
       height: 60px;
     }
   }
-
-
-
-  .buttons{
+  .buttons {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 20px;
 
-    button{
-        width: fit-content;
-        height: 1.5rem;
+    button {
+      width: fit-content;
+      height: 1.5rem;
     }
 
-    #red{
-        background-color: red;
+    #red {
+      background-color: red;
     }
 
-    #green{
-        background-color: green;
+    #green {
+      background-color: green;
     }
 
-    #blue{
-        background-color: rgb(57, 118, 239);
+    #blue {
+      background-color: rgb(57, 118, 239);
     }
   }
 }
