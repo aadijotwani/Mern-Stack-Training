@@ -4,28 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="mainBox">
-
-       <h1>AGE CALCULATOR</h1>
+      <h1>AGE CALCULATOR</h1>
 
       <div class="dob">
         <label for="DOB"> <h3>Enter your Date of Birth</h3></label>
-        <input type="date" id="DOB"/>
+        <input type="date" id="DOB" />
       </div>
-
 
       <div class="currentDate">
-        <label for="currentDate"><h3>Current Date</h3></label>
-        <input type="date" name="" id="currentDate">
+        <label for="currentDate">
+          <h3>Current Date</h3>
+        </label>
+        <span id="currentDate"></span>
       </div>
+      <div>Age: <span id="Age"></span></div>
 
       <button onclick="Calculate()">Calculate</button>
+    </div>
 
-    </div><script src="scrip.js"></script>
+    <script src="scrip.js"></script>
 
-    scr
   </body>
 </html>
