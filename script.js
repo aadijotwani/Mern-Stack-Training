@@ -11,8 +11,13 @@ function submit() {
     return;
   }
 
+  // we can add a function to validate my data
+  if (!validate()) {
+    return;
+  }
+
   let tempdata = JSON.parse(localStorage.getItem("Data")) || [];
- 
+
   //   if (!oldData) {
   //     tempdata = [];
   //   } else {

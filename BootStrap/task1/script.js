@@ -11,7 +11,7 @@ function Submit() {
     return;
   }
 
-  
+
   let tempdata = JSON.parse(localStorage.getItem("Data")) || [];
   tempdata.push({
     Name: nm,
@@ -36,6 +36,9 @@ function validate()
     const nm = document.getElementById("name").value.trim();
     const em = document.getElementById("email").value.trim();
     const ph = document.getElementById("phone").value.trim();
+
+    
+
 
 
 }
