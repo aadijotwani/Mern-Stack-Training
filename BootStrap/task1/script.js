@@ -3,29 +3,11 @@ function Submit() {
   const em = document.getElementById("email").value.trim();
   const ph = document.getElementById("phone").value.trim();
 
-  
-
-  if (!nm) {
-    alert("All Fields Requierd !!!!");
-    document.getElementById("nameError").innerText = "WARNING!! Please Fill the Field:";
+  if (!!isEmptyCheck()) {
     return;
   }
 
-  if (!em) {
-    alert("All Fields Requierd !!!!");
-    document.getElementById("emailError").innerText = "WARNING!! Please Fill the Field:";
-    return;
-  }
-
-  if (!ph) {
-    alert("All Fields Requierd !!!!");
-    document.getElementById("phoneError").innerText = "WARNING!! Please Fill the Field:";
-    return;
-  }
-
-
-  if(!!validate())
-  {
+  if (!!validate()) {
     return;
   }
 
@@ -77,5 +59,39 @@ function validate() {
     isValid = true;
   }
 
+  return isValid;
+}
+
+function isEmptyCheck() {
+  const nm = document.getElementById("name").value.trim();
+  const em = document.getElementById("email").value.trim();
+  const ph = document.getElementById("phone").value.trim();
+
+  let isValid = "false";
+
+  if (!nm) {
+    alert("All Fields Requierd !!!!");
+    document.getElementById("nameError").innerText =
+      "WARNING!! Please Fill the Field:";
+    isValid = true;
+  } 
+  
+  if (!em) {
+    alert("All Fields Requierd !!!!");
+    document.getElementById("emailError").innerText =
+      "WARNING!! Please Fill the Field:";
+    isValid = true;
+  }
+
+  if (!ph) {
+    alert("All Fields Requierd !!!!");
+    document.getElementById("phoneError").innerText =
+      "WARNING!! Please Fill the Field:";
+    isValid =  true;
+  }
+
+  if(isValid){
+  return isValid;
+  }
   return isValid;
 }
