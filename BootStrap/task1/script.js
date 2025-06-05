@@ -3,11 +3,12 @@ function Submit() {
   const em = document.getElementById("email").value.trim();
   const ph = document.getElementById("phone").value.trim();
 
-  if (!!isEmptyCheck()) {
-    return;
-  }
+  // if(!!isEmptyCheck(nm, em, ph))
+  //   {
+  //     return;
+  //   }
 
-  if (!!validate()) {
+  if (!validate()) {
     return;
   }
 
@@ -35,63 +36,83 @@ function validate() {
 
   document
     .querySelectorAll(".error")
-    .forEach((element) => (element.value = ""));
+    .forEach((element) => (element.innerText = ""));
 
-  let isValid = "false";
+  let isValid = "true";
 
-  if (!/^[a-z \s A-Z]+$/.test(nm) || nm.length < 3) {
+  if (!nm) {
+    document.getElementById("nameError").innerText =
+      "WARNING!! Please Fill the Field:";
+    isValid = false;
+  } else if (!/^[a-z \s A-Z]+$/.test(nm) || nm.length < 3) {
     document.getElementById("nameError").innerText =
       "Only Alphabets and Spaces are allowed, Must be Atleast 3 charecters";
-    isValid = true;
+    isValid = false;
   }
 
-  if (
+  if (!em) {
+    document.getElementById("emailError").innerText =
+      "WARNING!! Please Fill the Field:";
+    isValid = false;
+  } else if (
     !/^[a-zA-Z0-9._%+-]+@(gmail.com|yahoo.com|outlook.com|ricr.in)$/.test(em)
   ) {
     document.getElementById("emailError").innerText =
       "Please enter a valid Email ID";
-    isValid = true;
+    isValid = false;
   }
 
-  if (!/^[6-9]\d{9}$/.test(ph) || ph.length != 10) {
+  if (!ph) {
+    document.getElementById("phoneError").innerText =
+      "WARNING!! Please Fill the Field:";
+    isValid = false;
+  } else if (!/^[6-9]\d{9}$/.test(ph) || ph.length != 10) {
     document.getElementById("phoneError").innerText =
       "Please Enter a valid Phone Number";
-    isValid = true;
+    isValid = false;
   }
 
   return isValid;
 }
 
-function isEmptyCheck() {
-  const nm = document.getElementById("name").value.trim();
-  const em = document.getElementById("email").value.trim();
-  const ph = document.getElementById("phone").value.trim();
-
+function isEmptyCheck(nm, em, ph) {
   let isValid = "false";
 
   if (!nm) {
-    alert("All Fields Requierd !!!!");
     document.getElementById("nameError").innerText =
       "WARNING!! Please Fill the Field:";
     isValid = true;
-  } 
-  
+  }
+
   if (!em) {
-    alert("All Fields Requierd !!!!");
     document.getElementById("emailError").innerText =
       "WARNING!! Please Fill the Field:";
     isValid = true;
   }
 
   if (!ph) {
-    alert("All Fields Requierd !!!!");
     document.getElementById("phoneError").innerText =
       "WARNING!! Please Fill the Field:";
-    isValid =  true;
+    isValid = true;
   }
 
-  if(isValid){
-  return isValid;
+  if (!!nm) {
+    document.getElementById("nameError").innerText = "";
+    isValid = false;
   }
-  return isValid;
+
+  if (!!em) {
+    document.getElementById("emailError").innerText = "";
+    isValid = false;
+  }
+
+  if (!!ph) {
+    document.getElementById("phoneError").innerText = "";
+    isValid = false;
+  }
+
+  if (!!isValid) {
+    alert("All Fields Requierd !!!!");
+    return isValid;
+  }
 }
