@@ -93,5 +93,5 @@ function isEmptyCheck() {
   if(isValid){
   return isValid;
   }
-  return isValid;
+  return;
 }
