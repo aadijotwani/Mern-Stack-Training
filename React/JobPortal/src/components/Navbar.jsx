@@ -1,11 +1,14 @@
 import React from "react";
 import logo from "../assets/image.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  
+  const navigate = useNavigate();
+
   return (
     <>
-      <div className="p-5 text-black flex justify-center gap-45 items-center">
+      <div className="p-5 bg-white text-black flex justify-center gap-45 items-center sticky top-0 z-99">
         <img src={logo} alt="logo" className="h-15" />
         <div className="flex gap-11 font-sans">
           <NavLink to={"/"} className="text-black hover:text-[#F54677] ">
@@ -22,10 +25,10 @@ const Navbar = () => {
           </NavLink>
         </div>
         <div className="flex gap-3">
-          <button className="py-4 border px-13 hover:bg-[#F54677] hover:text-white">
+          <button className="py-4 border px-13 hover:bg-[#F54677] hover:text-white" onClick={()=>navigate("/register")}>
             Register
           </button>
-          <button className="py-4 px-8 border hover:bg-[#F54677] hover:text-white">
+          <button className="py-4 px-8 border hover:bg-[#F54677] hover:text-white"onClick={()=>navigate("/login")}>
             Login
           </button>
         </div>

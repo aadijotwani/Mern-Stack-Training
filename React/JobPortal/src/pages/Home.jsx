@@ -4,6 +4,8 @@ import Hero from "../components/Hero";
 const Home = () => {
   return (
     <>
+   
+   
     <Hero/>
     <h1>
       This is Home Page

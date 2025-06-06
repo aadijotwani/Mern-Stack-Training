@@ -20,7 +20,7 @@ const Hero = () => {
               className="text-gray-700 p-5 w-75 focus:outline-none focus:ring-0"
             />
             <span className="text-3xl text-gray-400">|</span>
-            <select name="Location" className="p-5 w-55 focus:outline-none focus:ring-0 border-s-1 ">
+            <select name="Location" className="p-5 w-55 focus:outline-none focus:ring-0 ">
               <option value="1">Location BD</option>
               <option value="2">Location PK</option>
               <option value="3">Location US</option>
