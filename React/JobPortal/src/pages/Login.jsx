@@ -1,60 +1,72 @@
 import React from "react";
-import { NavLink ,useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 
 const Login = () => {
 
   const navigate = useNavigate();
 
   return (
-    <>
-      <div className="bg-gradient-to-r from-pink-200 to-blue-200 w-screen h-[88.9vh] flex items-center justify-center">
-        <div className="h-[60%] w-[35%] bg-white/30 rounded-[40px] shadow-sm shadow-gray-400 hover:shadow-gray-400 hover:shadow-xl hover:transition duration-1800 flex flex-col gap-15">
-          <h1 className="mt-1 ml-4 text-[60px] font-bold bg-gradient-to-br from-gray-900 to-red-700 bg-clip-text text-transparent">
-            Login
-          </h1>
-
-          <div className="ml-5 mr-5 flex flex-col gap-8">
-            <div className="flex items-center justify-between">
-              <span className="font-extrabold text-[23px]">User ID:</span>
+    <div className="h-[88.9vh] flex items-center justify-center bg-gradient-to-r from-pink-200 to-blue-200">
+      <div className="w-full max-w-md bg-white/80 rounded-2xl shadow-lg p-8 flex flex-col gap-8">
+        <h1 className="text-4xl font-bold text-[#1A3C5A] text-center mb-2">Login</h1>
+        <form className="flex flex-col gap-6">
+          <div>
+            <label htmlFor="UserID" className="block text-lg font-semibold text-[#1A3C5A] mb-1">
+              User ID
+            </label>
             <input
               type="text"
-              name="Userid"
               id="UserID"
-              className="border-b w-[75%] focus:outline-none text-xl focus:ring-0"
+              name="Userid"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white"
+              autoComplete="username"
             />
-            </div>
-            
-
-            <div className="flex items-center justify-between">
-            <span className="font-extrabold text-[23px]">Password:</span>
+          </div>
+          <div>
+            <label htmlFor="password" className="block text-lg font-semibold text-[#1A3C5A] mb-1">
+              Password
+            </label>
             <input
-              type="text"
-              name="Password"
+              type="password"
               id="password"
-              className="border-b w-[75%] focus:outline-none text-xl focus:ring-0"
+              name="Password"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white"
+              autoComplete="current-password"
             />
-            </div>
-
-            <div className="flex gap-3 items-center text-md text-blue-600 font-bold">
-              <input type="checkbox" id="rememMe"/>
-              <span>Remember Me</span>
-            </div>
-
           </div>
-
-          <div className="flex flex-col justify-center items-center gap-3">
-          <div className="flex item-center justify-center gap-5 font-sans">
-              <button className="bg-[#F54677] shadow-sm shadow-gray-900 text-white text-2xl active:bg-white active:text-black font-bold rounded-[13px] w-40 h-13" >Login</button>
-              <button className="bg-white shadow-sm shadow-gray-900 text-black text-2xl font-bold active:bg-[#F54677] active:text-white rounded-[13px] w-40 h-13">Reset</button>
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="rememMe"
+              className="h-4 w-4 accent-[#FF4081]"
+            />
+            <label htmlFor="rememMe" className="text-sm text-gray-500">
+              Remember Me
+            </label>
           </div>
-          <div className="text-[#007BFF] font-bold">
-              <button className="hover:text-[#F54677]" onClick={() => navigate("/Register")} >Not Registered? / Create Account</button>
-          </div>
-          </div>
-
+          <button
+            type="submit"
+            className="w-full py-3 bg-[#1A3C5A] text-white font-bold rounded-lg hover:bg-[#FF4081] transition-colors duration-200"
+          >
+            Login
+          </button>
+          <button
+            type="reset"
+            className="w-full py-3 bg-white border border-[#1A3C5A] text-[#1A3C5A] font-bold rounded-lg hover:bg-[#FF4081] hover:text-white transition-colors duration-200"
+          >
+            Reset
+          </button>
+        </form>
+        <div className="text-center mt-2">
+          <button
+            className="text-[#FF4081] hover:underline font-semibold"
+            onClick={() => navigate("/Register")}
+          >
+            Not Registered? / Create Account
+          </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
