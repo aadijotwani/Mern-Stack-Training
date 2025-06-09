@@ -31,6 +31,7 @@ function submit() {
   });
 
   const Data = JSON.stringify(tempdata);
+
   localStorage.setItem("Data", Data);
 
   reset();
