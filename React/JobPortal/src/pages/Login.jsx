@@ -1,37 +1,59 @@
-import React from "react";
-import {useNavigate } from "react-router-dom";
+import react, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-
   const navigate = useNavigate();
+
+  const [loginData, setLoginData] = useState({
+    Userid: "",
+    Password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setLoginData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form submitted:", loginData);
+  };
 
   return (
     <div className="h-[88.9vh] flex items-center justify-center bg-gradient-to-r from-pink-200 to-blue-200">
       <div className="w-full max-w-md bg-white/80 rounded-2xl shadow-lg p-8 flex flex-col gap-8">
-        <h1 className="text-4xl font-bold text-[#1A3C5A] text-center mb-2">Login</h1>
-        <form className="flex flex-col gap-6">
+        <h1 className="text-4xl font-bold text-[#1A3C5A] text-center mb-2">
+          Login
+        </h1>
+        <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="UserID" className="block text-lg font-semibold text-[#1A3C5A] mb-1">
+            <label
+              htmlFor="UserID"
+              className="block text-lg font-semibold text-[#1A3C5A] mb-1"
+            >
               User ID
             </label>
             <input
               type="text"
-              id="UserID"
               name="Userid"
+              value={loginData.Userid}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white"
-              autoComplete="username"
+              onChange={handleChange}
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-lg font-semibold text-[#1A3C5A] mb-1">
+            <label
+              htmlFor="password"
+              className="block text-lg font-semibold text-[#1A3C5A] mb-1"
+            >
               Password
             </label>
             <input
               type="password"
-              id="password"
               name="Password"
+              value={loginData.Password}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white"
-              autoComplete="current-password"
+              onChange={handleChange}
             />
           </div>
           <div className="flex items-center gap-2">

@@ -1,0 +1,1 @@
+export const state = ["Delhi", "MP", "Haryana", "Chandigarh", "Kolkalta"];
