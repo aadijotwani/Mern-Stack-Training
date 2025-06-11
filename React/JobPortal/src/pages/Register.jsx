@@ -4,7 +4,19 @@ import { state } from "../../public/dummy";
 
 const Register = () => {
   const navigate = useNavigate();
-  const [registerData, setRegisterData] = useState({});
+  const [registerData, setRegisterData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone:"",
+    states:"",
+    address:"",
+    newPassword:"",
+    renewPassword:"", 
+  });
+
+
+
 
   return (
     <>
@@ -13,7 +25,7 @@ const Register = () => {
           <h1 className="text-4xl font-bold text-[#1A3C5A] text-center mb-2">
             Register
           </h1>
-          <form className="flex flex-col gap-6">
+          <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
             <div className="flex gap-3 ">
               <div className="flex items-center gap-5 ">
                 <label className="min-w-fit text-lg font-semibold text-[#1A3C5A] mb-1">
@@ -21,7 +33,7 @@ const Register = () => {
                 </label>
                 <input
                   type="text"
-                  name="fname"
+                  name="firstName"
                   className="w-[14.7rem] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white"
                 />
               </div>
@@ -32,7 +44,7 @@ const Register = () => {
                 </label>
                 <input
                   type="text"
-                  name="lname"
+                  name="lastName"
                   className="w-[14.7rem] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white"
                 />
               </div>
@@ -75,7 +87,7 @@ const Register = () => {
                   State:
                 </label>
                 <select
-                  name="state"
+                  name="states"
                   className="border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white w-[14.5rem] px-4 py-2"
                 >
                   <option value="">Select State</option>
@@ -108,28 +120,28 @@ const Register = () => {
 
             <div className="flex items-center gap-8">
               <label
-                htmlFor="newpassword"
+                htmlFor="newPassword"
                 className="min-w-fit text-lg font-semibold text-[#1A3C5A] mb-1"
               >
                 Password:
               </label>
               <input
                 type="password"
-                name="newpassword"
+                name="newPassword"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white"
               ></input>
             </div>
 
             <div className="flex items-center gap-8">
               <label
-                htmlFor="renewpassword"
+                htmlFor="renewPassword"
                 className="min-w-fit text-lg font-semibold text-[#1A3C5A] mb-1"
               >
                 Confirm <br /> Password:
               </label>
               <input
                 type="password"
-                name="renewpassword"
+                name="renewPassword"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white"
               ></input>
             </div>
