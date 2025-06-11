@@ -5,17 +5,17 @@ const Login = () => {
   const navigate = useNavigate();
 
   const [loginData, setLoginData] = useState({
-    Userid: "",
+    Userid: "", //way of initializing the name components or input types present in the page
     Password: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e) => {  //every time i am writing anything in the input the function is called and everything is stored
     const { name, value } = e.target;
-    setLoginData((prev) => ({ ...prev, [name]: value }));
+    setLoginData((prev) => ({ ...prev, [name]: value })); //...prev thing 
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault();//stops that specific part of the page from reloading
     console.log("Form submitted:", loginData);
   };
 
