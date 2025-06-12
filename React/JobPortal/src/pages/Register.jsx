@@ -16,8 +16,8 @@ const Register = () => {
   });
 
   const handleChange = (e) => {
-    const {name,  value} = e.target; // const name = target.name;
-                                     // const value = target.value;        shorter way to write instead of these 2 lines
+    const {name,  value} = e.target; // const name = e.target.name;
+                                     // const value = e.target.value;        shorter way to write instead of these 2 lines
 
     setRegisterData((prev) => ({...prev, [name]: value}));
   };

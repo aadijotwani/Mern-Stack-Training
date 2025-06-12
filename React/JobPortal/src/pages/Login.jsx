@@ -18,6 +18,7 @@ const Login = () => {
     e.preventDefault();//stops that specific part of the page from reloading
     console.log("Form submitted:", loginData);
   };
+  
 
   return (
     <div className="h-[88.9vh] flex items-center justify-center bg-gradient-to-r from-pink-200 to-blue-200">
