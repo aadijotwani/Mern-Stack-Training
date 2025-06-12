@@ -15,6 +15,18 @@ const Register = () => {
     renewPassword:"", 
   });
 
+  const handleChange = (e) => {
+    const {name,  value} = e.target; // const name = target.name;
+                                     // const value = target.value;        shorter way to write instead of these 2 lines
+
+    setRegisterData((prev) => ({...prev, [name]: value}));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Registered Data:", registerData);
+  };
+
 
 
 
@@ -35,6 +47,7 @@ const Register = () => {
                   type="text"
                   name="firstName"
                   className="w-[14.7rem] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white"
+                  onChange={handleChange}
                 />
               </div>
 
@@ -46,6 +59,7 @@ const Register = () => {
                   type="text"
                   name="lastName"
                   className="w-[14.7rem] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white"
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -61,6 +75,7 @@ const Register = () => {
                 type="email"
                 name="email"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white"
+                onChange={handleChange}
               />
             </div>
 
@@ -76,6 +91,7 @@ const Register = () => {
                   type="tel"
                   name="phone"
                   className="w-[16.7rem] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white"
+                  onChange={handleChange}
                 />
               </div>
 
@@ -89,12 +105,13 @@ const Register = () => {
                 <select
                   name="states"
                   className="border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white w-[14.5rem] px-4 py-2"
+                  onChange={handleChange}
                 >
                   <option value="">Select State</option>
                   {state.length ? (
-                    state.map((aadi, jotwani) => (
-                      <option value={aadi} key={jotwani}>
-                        {aadi}
+                    state.map((value, index) => (
+                      <option value={value} key={index}>
+                        {value}
                       </option>
                     ))
                   ) : (
@@ -115,6 +132,7 @@ const Register = () => {
                 name="address"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white"
                 rows="3"
+                onChange={handleChange}
               ></textarea>
             </div>
 
@@ -129,6 +147,7 @@ const Register = () => {
                 type="password"
                 name="newPassword"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white"
+                onChange={handleChange}
               ></input>
             </div>
 
@@ -143,6 +162,7 @@ const Register = () => {
                 type="password"
                 name="renewPassword"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white"
+                onChange={handleChange}
               ></input>
             </div>
 

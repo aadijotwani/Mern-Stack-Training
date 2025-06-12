@@ -10,7 +10,7 @@ const Login = () => {
   });
 
   const handleChange = (e) => {  //every time i am writing anything in the input the function is called and everything is stored
-    const { name, value } = e.target;
+    const {name, value} = e.target;
     setLoginData((prev) => ({ ...prev, [name]: value })); //...prev thing 
   };
 
