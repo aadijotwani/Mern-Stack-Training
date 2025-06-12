@@ -3,7 +3,7 @@ import React from "react";
 const Hero = () => {
   return (
     <>
-      <div className='bg-[url("hero.png")] w-screen h-[90vh] bg-center bg-no-repeat flex-col relative'>
+      <div className='bg-[url("hero.png")] w-full h-[90vh] bg-center bg-no-repeat flex-col relative'>
         <div className="absolute w-1/2 h-full flex flex-col justify-center items-start gap-10 left-2/12 top-0">
           <span className="text-8xl text-blue-950 font-extrabold leading-25">
             Find the <br /> most excitng <br />
