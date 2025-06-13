@@ -3,7 +3,6 @@ import logo from "../assets/image.png";
 import { NavLink, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  
   const navigate = useNavigate();
 
   return (
@@ -25,10 +24,16 @@ const Navbar = () => {
           </NavLink>
         </div>
         <div className="flex gap-3">
-          <button className="py-4 border px-13 bg-[#F54677] text-white hover:bg-white hover:text-black rounded-[20px]" onClick={()=>navigate("/register")}>
+          <button
+            className="py-4 border px-13 bg-[#F54677] text-white hover:bg-white hover:text-black rounded-[20px]"
+            onClick={() => navigate("/register")}
+          >
             Register
           </button>
-          <button className="py-4 px-8 border hover:bg-[#F54677] hover:text-white rounded-[20px]"onClick={()=>navigate("/login")}>
+          <button
+            className="py-4 px-8 border hover:bg-[#F54677] hover:text-white rounded-[20px]"
+            onClick={() => navigate("/login")}
+          >
             Login
           </button>
         </div>
