@@ -1,0 +1,23 @@
+body {
+  position: relative;
+
+  #outerBox {
+    width: 25rem;
+    height: 25rem;
+    border: 2px solid black;
+    position: absolute;
+    top: 16rem;
+    left: 70vh;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+
+  #inputArea{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
