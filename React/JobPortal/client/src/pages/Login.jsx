@@ -61,7 +61,7 @@ const Login = () => {
             <input
               type="checkbox"
               id="rememMe"
-              className="h-4 w-4 accent-[#FF4081]"
+              className="h-4 w-4 accent-[#ec275f]"
             />
             <label htmlFor="rememMe" className="text-sm text-gray-500">
               Remember Me
@@ -69,20 +69,20 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="w-full py-3 bg-[#1A3C5A] text-white font-bold rounded-lg hover:bg-[#FF4081] transition-colors duration-200"
+            className="w-full py-3 bg-[#1A3C5A] text-white font-bold rounded-lg hover:bg-[#ec275f] transition-colors duration-200"
           >
             Login
           </button>
           <button
             type="reset"
-            className="w-full py-3 bg-white border border-[#1A3C5A] text-[#1A3C5A] font-bold rounded-lg hover:bg-[#FF4081] hover:text-white transition-colors duration-200"
+            className="w-full py-3 bg-white border border-[#1A3C5A] text-[#1A3C5A] font-bold rounded-lg hover:bg-[#ec275f] hover:text-white transition-colors duration-200"
           >
             Reset
           </button>
         </form>
         <div className="text-center mt-2">
           <button
-            className="text-[#FF4081] hover:underline font-semibold"
+            className="text-[#ec275f] hover:underline font-semibold"
             onClick={() => navigate("/Register")}
           >
             Not Registered? / Create Account

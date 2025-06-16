@@ -32,7 +32,7 @@ const Hero = () => {
               </select>
             </div>
 
-            <button className="bg-[#F54677] text-white w-35 p-5 rounded-2xl">Find Job</button>
+            <button className="bg-[#ec275f] text-white w-35 p-5 rounded-2xl">Find Job</button>
           </div>
         </div>
       </div>

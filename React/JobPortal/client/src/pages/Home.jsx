@@ -1,14 +1,14 @@
 import React from "react";
 import Hero from "../components/Hero";
+import Category from "../components/Category";
 
 const Home = () => {
-
   return (
     <>
-      <Hero />
-      <h1>This is Home Page</h1>
-
-     
+      <div className="flex flex-col gap-45">
+        <Hero />
+        <Category />
+      </div>
     </>
   );
 };

@@ -5,7 +5,7 @@ const app = express(); // ham express ka object bana rahe hai jisko naam app de 
 //app.get(path, callback Function)
 
 app.get("/", (req, res) => {
-  console.log("Server Connceted");
+  console.log("User tried to access the server");
  res.json({ message: "Hello, I am Backend!" });
 });
 

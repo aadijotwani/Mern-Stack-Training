@@ -46,7 +46,7 @@ const Register = () => {
                 <input
                   type="text"
                   name="firstName"
-                  className="w-[14.7rem] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white"
+                  className="w-[14.7rem] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ec275f] text-[#1A3C5A] bg-white"
                   onChange={handleChange}
                 />
               </div>
@@ -58,7 +58,7 @@ const Register = () => {
                 <input
                   type="text"
                   name="lastName"
-                  className="w-[14.7rem] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white"
+                  className="w-[14.7rem] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ec275f] text-[#1A3C5A] bg-white"
                   onChange={handleChange}
                 />
               </div>
@@ -74,7 +74,7 @@ const Register = () => {
               <input
                 type="email"
                 name="email"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ec275f] text-[#1A3C5A] bg-white"
                 onChange={handleChange}
               />
             </div>
@@ -90,7 +90,7 @@ const Register = () => {
                 <input
                   type="tel"
                   name="phone"
-                  className="w-[16.7rem] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white"
+                  className="w-[16.7rem] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ec275f] text-[#1A3C5A] bg-white"
                   onChange={handleChange}
                 />
               </div>
@@ -104,7 +104,7 @@ const Register = () => {
                 </label>
                 <select
                   name="states"
-                  className="border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white w-[14.5rem] px-4 py-2"
+                  className="border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ec275f] text-[#1A3C5A] bg-white w-[14.5rem] px-4 py-2"
                   onChange={handleChange}
                 >
                   <option value="">Select State</option>
@@ -130,7 +130,7 @@ const Register = () => {
               </label>
               <textarea
                 name="address"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ec275f] text-[#1A3C5A] bg-white"
                 rows="3"
                 onChange={handleChange}
               ></textarea>
@@ -146,7 +146,7 @@ const Register = () => {
               <input
                 type="password"
                 name="newPassword"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ec275f] text-[#1A3C5A] bg-white"
                 onChange={handleChange}
               ></input>
             </div>
@@ -161,21 +161,21 @@ const Register = () => {
               <input
                 type="password"
                 name="renewPassword"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ec275f] text-[#1A3C5A] bg-white"
                 onChange={handleChange}
               ></input>
             </div>
 
             <button
               type="createAccount"
-              className="w-full py-3 bg-[#1A3C5A] text-white font-bold rounded-lg hover:bg-[#FF4081] transition-colors duration-200"
+              className="w-full py-3 bg-[#1A3C5A] text-white font-bold rounded-lg hover:bg-[#ec275f] transition-colors duration-200"
             >
               Create Account
             </button>
 
             <button
               type="reset"
-              className="w-full py-3 bg-white border border-[#1A3C5A] text-[#1A3C5A] font-bold rounded-lg hover:bg-[#FF4081] hover:text-white transition-colors duration-200"
+              className="w-full py-3 bg-white border border-[#1A3C5A] text-[#1A3C5A] font-bold rounded-lg hover:bg-[#ec275f] hover:text-white transition-colors duration-200"
             >
               Reset
             </button>
@@ -183,7 +183,7 @@ const Register = () => {
 
           <div className="text-center mt-2">
             <button
-              className="text-[#FF4081] hover:underline font-semibold"
+              className="text-[#ec275f] hover:underline font-semibold"
               onClick={() => navigate("/Login")}
             >
               Already have an account? / Login Now
