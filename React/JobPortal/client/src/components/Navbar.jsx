@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../assets/image.png";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";// can also use only import {link} form react router dom
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -10,7 +10,7 @@ const Navbar = () => {
       <div className="p-4 bg-white text-black flex justify-center gap-70 items-center sticky top-0 z-99 w-full">
         <img src={logo} alt="logo" className="h-15" />
         <div className="flex gap-11 font-sans">
-          <NavLink to={"/"} className="text-black hover:text-[#ec275f] ">
+          <NavLink to={"/"} className="text-black hover:text-[#ec275f] "> {/*Here also we can directly use <link to={"/"}> */}
             Home
           </NavLink>
           <NavLink to={"/about"} className="text-black hover:text-[#ec275f]">
