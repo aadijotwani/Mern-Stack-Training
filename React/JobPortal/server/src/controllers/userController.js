@@ -1,6 +1,6 @@
-import User from "../models/usermodel";
+import User from "../models/usermodel.js";
 import bcrypt from "bcrypt";
-import { genAuthToken, getAuthToken } from "../config/auth.js";
+import { genAuthToken } from "../config/auth.js";
 
 export const userRegister = async (req, res) => {
   try {
@@ -73,7 +73,7 @@ export const userLogin = async (req, res) => {
       return;
     }
 
-    getAuthToken(user._id, res);
+    genAuthToken(user._id, res);
     res.status(200).json({ message: "User Login Succesfull" });
   
 } catch (error) {

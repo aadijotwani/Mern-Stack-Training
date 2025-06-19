@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { state } from "../../public/dummy";
+import toast from "react-hot-toast";
+import axios from "../config/api";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -8,27 +10,31 @@ const Register = () => {
     firstName: "",
     lastName: "",
     email: "",
-    phone:"",
-    state:"",
-    address:"",
-    password:"",
-    cfPassword:"", 
+    phone: "",
+    state: "",
+    address: "",
+    password: "",
+    cfPassword: "",
   });
 
   const handleChange = (e) => {
-    const {name,  value} = e.target; // const name = e.target.name;
-                                     // const value = e.target.value;        shorter way to write instead of these 2 lines
+    const { name, value } = e.target; // const name = e.target.name;
+    // const value = e.target.value;        shorter way to write instead of these 2 lines
 
-    setRegisterData((prev) => ({...prev, [name]: value}));
+    setRegisterData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Registered Data:", registerData);
+
+    try {
+      const res = await axios.post("/auth/register", registerData);
+      toast.success(res.data.message);
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
-
-
-
 
   return (
     <>
