@@ -1,15 +1,6 @@
 import mongoose from "mongoose";
 
 const userSchema = mongoose.Schema(
-  //Structure of the table is being decided
-  /*    firstName: "",
-       lastName: "",
-       email: "",
-       phone:"",
-       state:"",
-       address:"",
-       password:"",
-       cfPassword:"", */
   {
     firstName: {
       type: String,
@@ -28,14 +19,6 @@ const userSchema = mongoose.Schema(
       required: true,
       unique: true,
     },
-    state: {
-      type: String,
-      required: true,
-    },
-    address: {
-      type: String,
-      required: true,
-    },
     password: {
       type: String,
       required: true,
@@ -43,6 +26,11 @@ const userSchema = mongoose.Schema(
     photo: {
       type: String,
       default: "",
+    },
+    role: {
+      type: String,
+      enum: ["Admin", "User", "Recruiter"],
+      required: true,
     },
   },
   { timestamps: true }

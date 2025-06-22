@@ -28,7 +28,13 @@ const Login = () => {
     try {
       const res = await axios.post("/auth/login", loginData);
       toast.success(res.data.message);
-      navigate("/userDashboard");
+      // console.log(res.data.data);
+      sessionStorage.setItem("user", JSON.stringify(res.data.data));
+      res.data.data.role === "Admin"
+        ? navigate("/adminDashboard")
+        : res.data.data.role === "User"
+        ? navigate("/userDashboard")
+        : navigate("/recruiterDashboard");
     } catch (error) {
       toast.error(
         `Error ${error?.response?.status || "503"} : ${
@@ -41,8 +47,8 @@ const Login = () => {
   };
 
   return (
-    <div className="h-screen p-10 flex items-center justify-center bg-gradient-to-r from-pink-200 to-blue-200">
-      <div className=" w-full max-w-md bg-white/80 rounded-2xl shadow-lg p-8 flex flex-col gap-8">
+    <div className="h-[89.8vh] p-10 flex items-center justify-center bg-gradient-to-r from-pink-200 to-blue-200">
+      <div className="w-full max-w-md bg-white/80 rounded-2xl shadow-lg p-8 flex flex-col gap-8">
         <h1 className="text-4xl font-bold text-[#1A3C5A] text-center mb-2">
           Login
         </h1>

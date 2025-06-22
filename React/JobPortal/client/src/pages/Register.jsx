@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { state } from "../../public/dummy";
+import { role } from "../../public/dummy";
 import Loading from "../assets/infinite-spinner.svg";
 import toast from "react-hot-toast";
 
 import axios from "../config/api";
+
 
 const Register = () => {
   const navigate = useNavigate();
@@ -15,8 +16,7 @@ const Register = () => {
     lastName: "",
     email: "",
     phone: "",
-    state: "",
-    address: "",
+    role: "",
     password: "",
     cfpassword: "",
   });
@@ -52,12 +52,8 @@ const Register = () => {
       errors.phone = "Please enter a valid phone number (10 digits)";
       isValid = false;
     }
-    if (!registerData.state) {
-      errors.state = "Please select a state";
-      isValid = false;
-    }
-    if (!registerData.address || registerData.address.length < 10) {
-      errors.address = "Please enter a valid address (at least 10 characters)";
+    if (!registerData.role) {
+      errors.role = "Please select a state";
       isValid = false;
     }
 
@@ -100,6 +96,15 @@ const Register = () => {
     try {
       const res = await axios.post("/auth/register", registerData);
       toast.success(res.data.message);
+      setRegisterData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        role: "",
+        password: "",
+        cfpassword: "",
+      });
     } catch (error) {
       toast.error(
         `Error ${error?.response?.status || "503"} : ${
@@ -113,7 +118,7 @@ const Register = () => {
 
   return (
     <>
-      <div className="min-h-screen p-10 flex items-center justify-center bg-gradient-to-r from-pink-200 to-blue-200">
+      <div className="h-[89.8vh] p-10 flex items-center justify-center bg-gradient-to-r from-pink-200 to-blue-200">
         <div className="w-full max-w-3xl min-h-fit bg-white/80 rounded-2xl shadow-lg p-8 flex flex-col gap-8">
           <h1 className="text-4xl font-bold text-[#1A3C5A] text-center mb-2">
             Register
@@ -201,51 +206,30 @@ const Register = () => {
                     htmlFor="state"
                     className="min-w-fit text-lg font-semibold text-[#1a3c5a] mb-1"
                   >
-                    State:
+                    I am :
                   </label>
                   <select
-                    name="state"
+                    name="role"
                     className="border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white w-[14.5rem] px-4 py-2"
                     onChange={handleChange}
-                    value={registerData.state}
+                    value={registerData.role}
                   >
-                    <option value="">Select State</option>
-                    {state.length ? (
-                      state.map((value, index) => (
-                        <option value={value} key={index}>
-                          {value}
+                    <option value="">Select Role</option>
+                    {role.length ? (
+                      role.map((opt, index) => (
+                        <option value={opt.value} key={index}>
+                          {opt.display}
                         </option>
                       ))
                     ) : (
-                      <option value="">--No state Found--</option>
+                      <option value="">--No role Found--</option>
                     )}
                   </select>
                 </div>
-                {error.state && (
-                  <div className="text-red-500 text-sm ">{error.state}</div>
+                {error.role && (
+                  <div className="text-red-500 text-sm ">{error.role}</div>
                 )}
               </div>
-            </div>
-
-            <div className="grid -gap-2">
-              <div className="flex items-center gap-12">
-                <label
-                  htmlFor="address"
-                  className="min-w-fit text-lg font-semibold text-[#1a3c5a] mb-1"
-                >
-                  Address
-                </label>
-                <textarea
-                  name="address"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white"
-                  rows="3"
-                  onChange={handleChange}
-                  value={registerData.address}
-                ></textarea>
-              </div>
-              {error.address && (
-                <div className="text-red-500 text-sm ">{error.address}</div>
-              )}
             </div>
 
             <div className="grid -gap-2">
