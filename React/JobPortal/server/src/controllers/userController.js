@@ -26,6 +26,7 @@ export const userRegister = async (req, res, next) => {
       0
     )}${lastName.charAt(0)}`;
 
+
     const newUser = await User.create({
       firstName,
       lastName,
