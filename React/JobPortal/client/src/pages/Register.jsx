@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { role } from "../../public/dummy";
+import { role } from "../../public/dummy.js";
 import Loading from "../assets/infinite-spinner.svg";
 import toast from "react-hot-toast";
 
