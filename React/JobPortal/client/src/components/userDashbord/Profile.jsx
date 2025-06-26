@@ -1,9 +1,33 @@
 import { useState } from "react";
 import React from "react";
+import twitter from "../../assets/twitter.png";
+import linkedin from "../../assets/linkedin.png";
+import github from "../../assets/github.png";
+import facebook from "../../assets/facebook.png";
+import instagram from "../../assets/instagram.png";
+import { MdPhonelinkRing } from "react-icons/md";
+import { GrMapLocation } from "react-icons/gr";
+import { LuMailOpen } from "react-icons/lu";
+
 
 const Profile = () => {
+  const [details, setDetails] = useState(
+    JSON.parse(sessionStorage.getItem("user"))
+  );
 
-  const[details, setDetails] = useState(JSON.parse(sessionStorage.getItem("user")));
+  const socialLinks = [
+    { id: 1, name: "LinkedIn", url: details.linkedin, icons: linkedin },
+    { id: 2, name: "GitHub", url: details.github, icons: github },
+    { id: 3, name: "Twitter", url: details.twitter, icons: twitter },
+    { id: 4, name: "Facebook", url: details.facebook, icons: facebook },
+    { id: 5, name: "Instagram", url: details.instagram, icons: instagram },
+  ];
+
+  const personalDetails = [
+    { id: 1, label: "Phone", value: details.phone? details.phone : "N/A", icon: <MdPhonelinkRing />, bg: "bg-gradient-to-r from-green-400 to-emerald-500"},
+    { id: 2, label: "Email", value: details.email? details.email : "N/A", icon: <LuMailOpen/>, bg: "bg-gradient-to-r from-pink-400 to-orange-400" },
+    { id: 3, label: "Address", value: details.address? details.address : "N/A", icon: <GrMapLocation />, bg: "bg-gradient-to-r from-sky-500 to-blue-400" },
+  ];
 
   return (
     <>
@@ -12,12 +36,82 @@ const Profile = () => {
           PROFILE
         </h1>
 
-        <div className="w-full mt-10 border border-black py-2">
+        <div className="w-full mt-10 py-2 flex gap-5">
           
-          <div className="w-40 h-40 border border-red-400 overflow-hidden flex items-center justify-center">
-            <img src={details.photo} alt="" className="w-full h-full object-cover" />
-          </div>
+          <div className="w-100 h-[60vh] flex flex-col items-center bg-white rounded-4xl shadow-3xl gap-4 mt-20 relative">
+            <div className="w-50 h-50 rounded-4xl border-red-400 overflow-hidden flex items-center justify-center absolute -top-20">
+              <img
+                src={details.photo}
+                alt=""
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <h1 className="pt-35 text-3xl font-bold font-sans">{details.firstName +" "+ details.lastName}</h1>
+            <span className="text-md text-slate-500">Frontend Developer</span>
+            <div className="flex items-center gap-3 mt-2">
+             {socialLinks.map((links) => (
+              <button className="shadow-md shadow-slate-400/50 bg-pink-100 h-11 w-11 rounded-lg" key={links.id}>
+                <img src={links.icons} alt="" />
+              </button>
+             ))}
+            </div>
 
+            <div className="mt-4 flex flex-col gap-2.5">
+              {personalDetails.map((personal) => (
+                <div className="w-[30vh] h-15 flex justify-start items-center gap-5 bg-blue-100/60 shadow-sm rounded-xl p-2" key={personal.id}>
+                
+                  <div className={` ${personal.bg} h-10 w-9.5 flex justify-center items-center rounded-lg`}>
+                    <h1 className="text-3xl text-white ">{personal.icon}</h1>
+                  </div>
+                  
+                  <div className="flex flex-col justify-start items-start">
+                    <h1 className="text-md text-slate-600 font-semibold">{personal.label}:</h1>
+                    <h1 className="leading-4 font-semibold text-lg">{personal.value}</h1>
+                  </div>
+                  
+              </div>
+              ))}
+              
+            </div>
+          </div>
+            
+            {/* Content of Profile */}
+          <div className="w-1/1 h-[60vh] flex flex-col bg-white rounded-4xl shadow-3xl gap-1 mt-20  ">
+            <div>
+              <div className="flex items-center w-full">
+                <span className="font-sans text-4xl pt-5 px-5 font-semibold">ABOUT ME </span>
+                <div className="mt-6 w-90 h-1 bg-gradient-to-r from-blue-500 to-pink-500 rounded-full"></div>
+              </div>
+              <div>
+                <p className="text-xl text-black p-5">
+                  {details.about ? details.about : "Hello there! I'm thrilled to welcome you to my portfolio. I am a passionate and versatile frontend developer with a keen interest in exploring the latest cutting-edge technologies. My journey in the world of web development has been nothing short of exhilarating and I constantly strive to enhance my skills and embrace emerging trends in the industry."}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-5 h-full">
+                <span className="font-sans text-4xl pt-5 px-5 font-semibold">What I Do! </span>
+                <div className="px-6 h-full flex gap-6">
+                  
+                  <div className="h-full w-full flex flex-col gap-6 pb-6">
+                    <div className="border w-full h-1/2"></div>
+                    <div className="border w-full h-1/2"></div>
+                  </div>
+
+                  <div className="h-full w-full flex flex-col gap-6 pb-6">
+                    <div className="border w-full h-1/2"></div>
+                    <div className="border w-full h-1/2"></div>
+                  </div>
+
+                  
+                  
+                  
+                </div>
+            </div>
+            
+            
+
+          </div>
         </div>
       </div>
     </>

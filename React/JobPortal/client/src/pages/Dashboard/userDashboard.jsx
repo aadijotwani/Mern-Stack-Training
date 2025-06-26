@@ -1,7 +1,7 @@
 import React, { Profiler, useState } from "react";
 
 import Sidebar from "../../components/userDashbord/Sidebar";
-import Dashboard from "../../components/userDashbord/dashboard";
+import Dashboard from "../../components/userDashbord/Dashboard"
 import Profile from "../../components/userDashbord/Profile";
 
 const userDashboard = () => {
@@ -15,7 +15,7 @@ const userDashboard = () => {
         <Sidebar active={active} setActive={setActive} />
 
         {/*Content*/}
-        <div className="w-5/6 bg-blue-100/80 rounded-4xl shadow-3xl h-[89.7vh]">
+        <div className="w-5/6 bg-gradient-to-r from-blue-200/60 to-sky-200/50  rounded-4xl shadow-3xl h-[89.7vh]">
           {active === "Dashboard" && <Dashboard />}
           {active === "Profile" && <Profile/>}
           {active === "My Jobs" && <div>My Job</div>}

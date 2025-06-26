@@ -29,7 +29,7 @@ const Dashboard = () => {
                     {item.label}
                   </h1>
                 </div>
-                <div className="rounded-full h-15 w-15 bg-sky-600 flex items-center justify-center text-2xl text-white ">
+                <div className="rounded-full h-15 w-15 bg-gradient-to-r from-sky-500 to-blue-700 bg-sky-600 flex items-center justify-center text-2xl text-white ">
                   <item.iconPack />
                 </div>
               </div>
