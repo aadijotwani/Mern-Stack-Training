@@ -26,7 +26,6 @@ export const userRegister = async (req, res, next) => {
       0
     )}${lastName.charAt(0)}`;
 
-
     const newUser = await User.create({
       firstName,
       lastName,
@@ -89,4 +88,57 @@ export const userLogin = async (req, res, next) => {
 
 export const userLogout = (req, res) => {
   res.json({ message: "User Logout Sucessfully" });
+};
+
+export const userUpdate = async (req, res, next) => {
+  try {
+    const {
+      firstName,
+      lastName,
+      email,
+      phone,
+      address,
+      linkedin,
+      github,
+      twitter,
+      facebook,
+      instagram,
+    } = req.body;
+    
+    if (!firstName || !lastName || !email || !phone) {
+      const error = new Error("All Fields Required!");
+      error.statusCode = 400;
+      return next(error);
+    }
+
+    // const existingUser = await User.findOne({ email });
+
+    // if (existingUser) {
+    //   const error = new Error("Email ID already Exist!");
+    //   error.statusCode = 409;
+    //   return next(error);
+    // }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user._id,
+      {
+        firstName,
+        lastName,
+        email,
+        phone,
+        address,
+        linkedin,
+        github,
+        twitter,
+        facebook,
+        instagram,
+      },
+      { new: true }
+    );
+
+    res.json({message: "User Data Updated Succesfully", data: updatedUser})
+
+  } catch (error) {
+    next(error);
+  }
 };

@@ -1,4 +1,4 @@
-import react, { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../config/api";
 import toast from "react-hot-toast";
@@ -85,7 +85,7 @@ const Login = () => {
               />
               <span
                 className="absolute right-1 border-s-2 border-gray-100 p-1 bg-white"
-                onClick={(e) => {
+                onClick={() => {
                   passwordVisible
                     ? setPasswordVisible(false)
                     : setPasswordVisible(true);

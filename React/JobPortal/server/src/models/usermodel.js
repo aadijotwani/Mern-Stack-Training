@@ -27,11 +27,49 @@ const userSchema = mongoose.Schema(
       type: String,
       default: "",
     },
+
     role: {
       type: String,
       enum: ["Admin", "User", "Recruiter"],
       required: true,
     },
+
+    address: {
+      type: String,
+      trim: true,
+      default: "",
+    }, 
+    
+    linkedin: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+    
+    github: {
+      type: String,
+      trim: true,
+      default: "",
+    }, 
+    
+    twitter: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+    
+    facebook: {
+      type: String,
+      trim: true,
+      default: "",
+    }, 
+    
+    instagram: {
+      type: String,
+      trim: true,
+      default: "",
+    }
+
   },
   { timestamps: true }
 );

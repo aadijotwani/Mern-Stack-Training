@@ -1,10 +1,10 @@
-import React, { Profiler, useState } from "react";
+import React, { useState } from "react";
 
 import Sidebar from "../../components/userDashbord/Sidebar";
 import Dashboard from "../../components/userDashbord/Dashboard"
 import Profile from "../../components/userDashbord/Profile";
 
-const userDashboard = () => {
+const UserDashboard = () => {
   const [active, setActive] = useState("Dashboard");
 
   return (
@@ -27,4 +27,4 @@ const userDashboard = () => {
   );
 };
 
-export default userDashboard;
+export default UserDashboard;
