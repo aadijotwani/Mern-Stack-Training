@@ -10,11 +10,15 @@ import { GrMapLocation } from "react-icons/gr";
 import { LuMailOpen } from "react-icons/lu";
 import AboutMe from "./AboutMe";
 import UserEditModels from "./Modals/UserEditModels";
+import { MdOutlineCameraAlt } from "react-icons/md";
+import { IoMdCloseCircle } from "react-icons/io";
+import { useEffect } from "react";
 
 const Profile = () => {
   const [details, setDetails] = useState(
     JSON.parse(sessionStorage.getItem("user"))
   );
+  const [preview, setPreview] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const socialLinks = [
@@ -49,6 +53,18 @@ const Profile = () => {
     },
   ];
 
+  const handleProfilePicChange = (e) => {
+    const file = URL.createObjectURL(e.target.files[0]);
+    console.log(file);
+    setPreview(file);
+  };
+
+  useEffect(() => {
+    if (!isEditModalOpen) {
+      setDetails(JSON.parse(sessionStorage.getItem("user")));
+    }
+  }, [isEditModalOpen]);
+
   return (
     <>
       <div className="h-full w-full p-10 grid gap-6">
@@ -56,13 +72,35 @@ const Profile = () => {
           PROFILE
         </h1>
 
-        <div className="w-full pb-4 grid md:flex gap-5 items-end">
-          <div className="w-100 h-[60vh] flex flex-col items-center bg-white rounded-4xl shadow-3xl gap-4 mt-20 relative">
-            <div className="w-50 h-50 rounded-4xl  overflow-hidden flex items-center justify-center absolute -top-20">
+        <div className="w-full grid pt-15 md:flex gap-5 items-end">
+          <div className="w-100 h-[62vh] flex flex-col items-center bg-white rounded-4xl shadow-3xl gap-4 relative">
+            <div className="w-50 h-50 rounded-4xl overflow-hidden flex items-center justify-center absolute -top-20  hover:bg-black/10">
               <img
-                src={details.photo}
+                src={preview || details.photo}
                 alt=""
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover "
+              />
+
+              {preview ? (
+                <button className="text-red absolute text-4xl text-red-600 font-bold top-2 right-2 z-1" onClick={() => (setPreview(null))}>
+                  <IoMdCloseCircle />
+                </button>
+              ) : (
+                ""
+              )}
+
+              <label
+                className="w-50 h-50 absolute hover:bg-black/60 flex items-center justify-center group"
+                htmlFor="profilePic"
+              >
+                <MdOutlineCameraAlt className="w-10 h-10 text-white opacity-0 group-hover:opacity-100" />
+              </label>
+
+              <input
+                type="file"
+                id="profilePic"
+                onChange={handleProfilePicChange}
+                className="hidden"
               />
             </div>
             <h1 className="pt-35 text-3xl font-bold font-sans">
@@ -83,20 +121,36 @@ const Profile = () => {
             <div className="mt-4 flex flex-col gap-2.5">
               {personalDetails.map((personal) => (
                 <div
-                  className="w-[30vh] h-15 flex justify-start items-center gap-5 bg-blue-100/60 shadow-sm rounded-xl p-2"
+                  className={`w-[30vh] flex gap-2.5 justify-start items-center bg-blue-100/60 shadow-sm rounded-xl pl-2  ${
+                    personal.value === details.address ? `h-22 ` : `h-15 py-2`
+                  }`}
                   key={personal.id}
                 >
                   <div
-                    className={` ${personal.bg} h-10 w-9.5 flex justify-center items-center rounded-lg`}
+                    className={` ${
+                      personal.bg
+                    } w-1/7 flex justify-center items-center rounded-lg ${
+                      personal.value === details.address ? `h-10` : `h-full`
+                    }`}
                   >
-                    <h1 className="text-3xl text-white ">{personal.icon}</h1>
+                    <h1 className="text-3xl text-white">{personal.icon}</h1>
                   </div>
 
-                  <div className="flex flex-col justify-start items-start">
+                  <div
+                    className={`flex flex-col justify-start items-start w-54 h-full ${
+                      personal.value === details.address ? `pt-2` : ``
+                    }`}
+                  >
                     <h1 className="text-md text-slate-600 font-semibold">
                       {personal.label}:
                     </h1>
-                    <h1 className="leading-4 font-semibold text-lg">
+                    <h1
+                      className={`leading-4 font-semibold ${
+                        personal.value === details.address
+                          ? "text-[12px]"
+                          : "text-lg"
+                      }`}
+                    >
                       {personal.value}
                     </h1>
                   </div>
@@ -118,7 +172,7 @@ const Profile = () => {
               </button>
             </div>
 
-            <div className="w-full h-[60vh] flex flex-col bg-white rounded-4xl shadow-3xl gap-1  relative ">
+            <div className="w-full h-[62vh] flex flex-col bg-white rounded-4xl shadow-3xl gap-1  relative ">
               <AboutMe details={details} />
             </div>
           </div>
@@ -133,4 +187,3 @@ const Profile = () => {
 };
 
 export default Profile;
-                

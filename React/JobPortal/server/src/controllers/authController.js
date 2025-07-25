@@ -86,8 +86,13 @@ export const userLogin = async (req, res, next) => {
   }
 };
 
-export const userLogout = (req, res) => {
-  res.json({ message: "User Logout Sucessfully" });
+export const userLogout = (req, res, next) => {
+  try {
+    res.cookie("secret", "", { expires: new Date(Date.now()) });
+    res.status(200).json({ message: "Logged Out Successfully" });
+  } catch (error) {
+    next(error);
+  }
 };
 
 export const userUpdate = async (req, res, next) => {
@@ -104,20 +109,14 @@ export const userUpdate = async (req, res, next) => {
       facebook,
       instagram,
     } = req.body;
-    
+
     if (!firstName || !lastName || !email || !phone) {
       const error = new Error("All Fields Required!");
       error.statusCode = 400;
       return next(error);
     }
 
-    // const existingUser = await User.findOne({ email });
-
-    // if (existingUser) {
-    //   const error = new Error("Email ID already Exist!");
-    //   error.statusCode = 409;
-    //   return next(error);
-    // }
+    //otp based email verification needed 
 
     const updatedUser = await User.findByIdAndUpdate(
       req.user._id,
@@ -136,8 +135,7 @@ export const userUpdate = async (req, res, next) => {
       { new: true }
     );
 
-    res.json({message: "User Data Updated Succesfully", data: updatedUser})
-
+    res.json({ message: "User Data Updated Succesfully", data: updatedUser });
   } catch (error) {
     next(error);
   }

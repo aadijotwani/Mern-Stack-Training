@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "../../config/api";
+import toast from "react-hot-toast";
 import { RxDashboard } from "react-icons/rx";
 import { LuUserCog } from "react-icons/lu";
 import { LuFileSpreadsheet } from "react-icons/lu";
@@ -7,12 +10,13 @@ import { MdOutlineWorkspacePremium } from "react-icons/md";
 import { TbLogout2 } from "react-icons/tb";
 
 const Sidebar = ({ active, setActive }) => {
+  const navigate = useNavigate();
   const sidebarItems = [
     { id: 1, label: "Dashboard", icon: RxDashboard, color: "text-blue-600" },
     { id: 2, label: "Profile", icon: LuUserCog, color: "text-pink-600" },
     {
       id: 3,
-      label: "Post a Job",
+      label: "Post a Jobs",
       icon: LuFileSpreadsheet,
       color: "text-green-600",
     },
@@ -30,7 +34,17 @@ const Sidebar = ({ active, setActive }) => {
   );
 
   const handleLogout = () => {
-    console.log("logout");
+    toast.promise(
+      axios.get("/auth/logout").then((res) => {
+        sessionStorage.removeItem("user"), navigate("/login");
+        return res;
+      }),
+      {
+        loading: "Logging out...",
+        success: (res) => res.data.message,
+        error: (err) => err.response.data.message || "Something went wrong!",
+      }
+    );
   };
 
   //blue-600",

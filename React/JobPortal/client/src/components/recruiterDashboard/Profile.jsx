@@ -1,5 +1,4 @@
 import { useState } from "react";
-import React from "react";
 import twitter from "../../assets/twitter.png";
 import linkedin from "../../assets/linkedin.png";
 import github from "../../assets/github.png";
@@ -9,7 +8,7 @@ import { MdPhonelinkRing } from "react-icons/md";
 import { GrMapLocation } from "react-icons/gr";
 import { LuMailOpen } from "react-icons/lu";
 import AboutMe from "./AboutMe";
-import UserEditModels from "./Modals/UserEditModels";
+import UserEditModels from "../recruiterDashboard/Modals/UserEditModels";
 
 const Profile = () => {
   const [details, setDetails] = useState(
