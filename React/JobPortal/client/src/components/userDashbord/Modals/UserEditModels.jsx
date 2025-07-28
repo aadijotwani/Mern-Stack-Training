@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import axios from "../../../config/api";
+import toast from "react-hot-toast";
 
 const UserEditModels = ({ isOpen, isClosed }) => {
   const [error, setError] = useState("");
@@ -9,30 +10,31 @@ const UserEditModels = ({ isOpen, isClosed }) => {
     JSON.parse(sessionStorage.getItem("user")) || {}
   );
 
-  
+  //raj sir ismai error waala code kaisia banau for invalid url help me pls !!!!!
 
-//raj sir ismai error waala code kaisia banau for invalid url help me pls !!!!!
+  const validate = () => {
+    let formError = {};
+    setError("");
 
-const validate = () => {
+    if (
+      !/^[A-Za-z\s]+$/.test(userData.firstName) ||
+      userData.firstName.trim() < 3
+    ) {
+      formError.firstName =
+        "First name should be at least 3 characters long and contain only letters and spaces.";
+    }
 
-  let formError = {};
-  setError("");
+    if (
+      !/^[A-Za-z\s]+$/.test(userData.lastName) ||
+      userData.lastName.trim() < 3
+    ) {
+      formError.lastName =
+        "Last name should be at least 3 characters long and contain only letters and spaces.";
+    }
 
-  if(!/^[A-Za-z\s]+$/.test(userData.firstName) || userData.firstName.trim() < 3){
-    formError.firstName = "First name should be at least 3 characters long and contain only letters and spaces.";
-  }
-
-  if(!/^[A-Za-z\s]+$/.test(userData.lastName) || userData.lastName.trim() < 3){
-    formError.lastName = "Last name should be at least 3 characters long and contain only letters and spaces.";
-  }
-
-
-  setError(formError);
-  return Object.keys(formError).length === 0;
-}
-
-
-
+    setError(formError);
+    return Object.keys(formError).length === 0;
+  };
 
   if (!isOpen) return null;
 
@@ -43,9 +45,10 @@ const validate = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    if(!validate()){
+
+    if (!validate()) {
       setLoading(false);
+      toast.error("Validation Failed");
       return;
     }
 
@@ -54,12 +57,13 @@ const validate = () => {
       console.log("Updated user data:", userData);
       sessionStorage.setItem("user", JSON.stringify(res.data.data));
       setUserData(res.data.data);
+      toast.success(res.data.message);
 
       isClosed();
     } catch (error) {
       console.error("Error updating user:", error);
-    }
-    finally {
+      toast.error("Error updating user:", error);
+    } finally {
       setLoading(false);
     }
   };

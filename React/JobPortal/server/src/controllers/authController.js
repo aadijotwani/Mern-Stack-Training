@@ -1,6 +1,7 @@
 import User from "../models/userModel.js";
 import bcrypt from "bcrypt";
 import { genAuthToken } from "../utils/auth.js";
+import getCloudinary from "../config/cloudinary.js";
 
 export const userRegister = async (req, res, next) => {
   try {
@@ -110,27 +111,43 @@ export const userUpdate = async (req, res, next) => {
       instagram,
     } = req.body;
 
-    if (!firstName || !lastName || !email || !phone) {
-      const error = new Error("All Fields Required!");
-      error.statusCode = 400;
-      return next(error);
+    // if (!firstName || !lastName || !email || !phone) {
+    //   const error = new Error("All Fields Required!");
+    //   error.statusCode = 400;
+    //   return next(error);
+    // }
+
+    let photo;
+    if (req.file) {
+      try {
+        const b64 = Buffer.from(req.file.buffer).toString("base64");
+        const dataURI = `data:${req.file.mimetype};base64,${b64}`;
+        const cloudinary = getCloudinary();
+        const result = await cloudinary.uploader.upload(dataURI);
+        photo = result.secure_url;
+      } catch (err) {
+        const error = new Error("Image Upload Failed: " + err.message);
+        error.statusCode = 500;
+        return next(error);
+      }
     }
 
-    //otp based email verification needed 
+    //otp based email verification needed
 
     const updatedUser = await User.findByIdAndUpdate(
       req.user._id,
       {
-        firstName,
-        lastName,
-        email,
-        phone,
-        address,
-        linkedin,
-        github,
-        twitter,
-        facebook,
-        instagram,
+        firstName: firstName || req.user.firstName,
+        lastName: lastName || req.user.lastName,
+        email: email || req.user.email,
+        phone: phone || req.user.phone,
+        address: address || req.user.address,
+        linkedin: linkedin || req.user.linkedin,
+        github: github || req.user.github,
+        twitter: twitter || req.user.twitter,
+        facebook: facebook || req.user.facebook,
+        instagram: instagram || req.user.instagram,
+        photo,
       },
       { new: true }
     );

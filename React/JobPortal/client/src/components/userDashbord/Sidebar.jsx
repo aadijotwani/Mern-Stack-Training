@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../../config/api";
 import toast from "react-hot-toast";
@@ -9,7 +9,7 @@ import { HiOutlineMail } from "react-icons/hi";
 import { MdOutlineWorkspacePremium } from "react-icons/md";
 import { TbLogout2 } from "react-icons/tb";
 
-const Sidebar = ({ active, setActive }) => {
+const Sidebar = ({ active, setActive, image }) => {
   const navigate = useNavigate();
   const sidebarItems = [
     { id: 1, label: "Dashboard", icon: RxDashboard, color: "text-blue-600" },
@@ -47,6 +47,10 @@ const Sidebar = ({ active, setActive }) => {
     );
   };
 
+  useEffect(() => {
+    setPersonDetail(JSON.parse(sessionStorage.getItem("user")));
+  }, [image]);
+
   //blue-600",
   //Profile: "text-pink-600",
   // "My Jobs": "text-green-600",
@@ -58,7 +62,7 @@ const Sidebar = ({ active, setActive }) => {
       <div className="h-[89.7vh] w-1/6 py-4 px-3 flex flex-col justify-between ">
         <div className="flex flex-col items gap-12 items-center">
           <div className="flex flex-col items-center gap-4">
-            <div className="border-3 border-black h-35 w-35 rounded-full overflow-hidden">
+            <div className="shadow-sm shadow-black/30 h-45 w-45 rounded-full overflow-hidden">
               <img
                 src={PersonDetail.photo}
                 alt=""

@@ -13,12 +13,16 @@ import UserEditModels from "./Modals/UserEditModels";
 import { MdOutlineCameraAlt } from "react-icons/md";
 import { IoMdCloseCircle } from "react-icons/io";
 import { useEffect } from "react";
+import { TiTick } from "react-icons/ti";
+import toast from "react-hot-toast";
+import axios from "../../config/api";
 
-const Profile = () => {
+const Profile = ({ setImage }) => {
   const [details, setDetails] = useState(
     JSON.parse(sessionStorage.getItem("user"))
   );
   const [preview, setPreview] = useState(null);
+  const [photo, setPhoto] = useState("");
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const socialLinks = [
@@ -57,7 +61,32 @@ const Profile = () => {
     const file = URL.createObjectURL(e.target.files[0]);
     console.log(file);
     setPreview(file);
+    setPhoto(e.target.files[0]);
+    return file;
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const updatedData = new FormData();
+    if (photo) updatedData.append("image", photo);
+
+    try {
+      const res = await axios.put("/auth/update", updatedData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      sessionStorage.setItem("user", JSON.stringify(res.data.data));
+      setImage(res.data.data);
+      toast.success("Photo Updated Successfully");
+      setPreview(null);
+    } catch (error) {
+      toast.error(error?.response?.data?.message || error.message);
+    }
+  };
+
+  useEffect(()=> {
+    setDetails(JSON.parse(sessionStorage.getItem("user")));
+  } ,[setImage])
 
   useEffect(() => {
     if (!isEditModalOpen) {
@@ -82,9 +111,21 @@ const Profile = () => {
               />
 
               {preview ? (
-                <button className="text-red absolute text-4xl text-red-600 font-bold top-2 right-2 z-1" onClick={() => (setPreview(null))}>
-                  <IoMdCloseCircle />
-                </button>
+                <div className=" absolute z-1 flex gap-2 w-full pb-3 px-3 h-full rounded-4xl items-end">
+                  <button
+                    className="text-red text-md text-white font-bold top-2 right-2 flex items-center bg-gradient-to-r from-rose-700 to-red-500 h-1/7 w-full justify-center p-1 rounded-xl hover:scale-115 transition-all duration-300"
+                    onClick={() => setPreview(null)}
+                  >
+                    <IoMdCloseCircle /> REVERT
+                  </button>
+
+                  <button
+                    className="text-red text-md text-white font-bold top-2 right-2 flex items-center bg-gradient-to-r from-green-500 to-emerald-600 h-1/7 w-full justify-center p-1 rounded-xl hover:scale-115 transition-all duration-300"
+                    onClick={handleSubmit}
+                  >
+                    <TiTick /> SAVE
+                  </button>
+                </div>
               ) : (
                 ""
               )}
