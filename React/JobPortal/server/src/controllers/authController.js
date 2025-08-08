@@ -8,7 +8,7 @@ export const userRegister = async (req, res, next) => {
     const { firstName, lastName, email, phone, role, password } = req.body;
 
     if (!firstName || !lastName || !email || !phone || !role || !password) {
-      const error = new Error("All feilds Required");
+      const error = new Error("All fields Required");
       error.statusCode = 400;
       return next(error);
     }

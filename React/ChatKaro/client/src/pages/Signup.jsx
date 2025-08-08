@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
-import { useTheme } from "../contexts/ThemeContext";
 import api from "../config/api";
 import logo from "../assets/logo.png";
 
@@ -25,24 +24,24 @@ const Signup = () => {
     let isValid = true;
     const errors = {};
 
-    if (!/^[a-zA-Z\s]+$/.test(userData.name)) {
-      errors.name =
-        "Please enter a valid name (only letters, at least 3 characters)";
-      isValid = false;
-    }
-    if (!/^[a-zA-Z0-9._]+@gmail.com$/.test(userData.email)) {
-      errors.email = "Please enter a valid email address";
-      isValid = false;
-    }
-    if (userData.password !== userData.confirmPassword) {
-      errors.confirmPassword = "Passwords do not match";
-      isValid = false;
-    }
+    // if (!/^[a-zA-Z\s]+$/.test(userData.name)) {
+    //   errors.name =
+    //     "Please enter a valid name (only letters, at least 3 characters)";
+    //   isValid = false;
+    // }
+    // if (!/^[a-zA-Z0-9._]+@gmail.com$/.test(userData.email)) {
+    //   errors.email = "Please enter a valid email address";
+    //   isValid = false;
+    // }
+    // if (userData.password !== userData.confirmPassword) {
+    //   errors.confirmPassword = "Passwords do not match";
+    //   isValid = false;
+    // }
 
-    setError(errors);
-    if (!isValid) {
-      toast.error("Please fix the errors before submitting");
-    }
+    // setError(errors);
+    // if (!isValid) {
+    //   toast.error("Please fix the errors before submitting");
+    // }
 
     return isValid;
   };
@@ -60,7 +59,7 @@ const Signup = () => {
     console.log("Regsitered Data", userData);
 
     try {
-     // const res = await api.post("/auth/signup", userData);
+     const res = await api.post("/auth/register", userData);
       toast.success(res.data.message);
       sessionStorage.setItem("user", JSON.stringify(res.data.data));
       setUserData({
