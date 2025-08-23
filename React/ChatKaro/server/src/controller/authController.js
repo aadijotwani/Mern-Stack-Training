@@ -39,8 +39,25 @@ export const userRegister = async (req, res, next) => {
   }
 };
 
-export const userLogin = (req, res, next) => {
+export const userLogin = async  (req, res, next) => {
   try {
+    const {email, password} = req.body;
+    
+    if(!email || !password){
+      const error = new Error("All fields Required");
+      error.statusCode = 400;
+      return next(error);
+
+      const existingUser = await user.findOne({email});
+
+      if(existingUser) { 
+        const error = new Error("Email already exist");
+        error.statusCode=409;
+        return next(error);
+      }
+
+      const hashedUser = await bcrypt.hash(password,10)
+    }
   } catch (error) {}
 };
 

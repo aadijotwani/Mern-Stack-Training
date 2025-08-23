@@ -24,28 +24,30 @@ const Signup = () => {
     let isValid = true;
     const errors = {};
 
-    // if (!/^[a-zA-Z\s]+$/.test(userData.name)) {
-    //   errors.name =
-    //     "Please enter a valid name (only letters, at least 3 characters)";
-    //   isValid = false;
-    // }
-    // if (!/^[a-zA-Z0-9._]+@gmail.com$/.test(userData.email)) {
-    //   errors.email = "Please enter a valid email address";
-    //   isValid = false;
-    // }
-    // if (userData.password !== userData.confirmPassword) {
-    //   errors.confirmPassword = "Passwords do not match";
-    //   isValid = false;
-    // }
+    if (!/^[a-zA-Z\s]+$/.test(userData.name)) {
+      errors.name =
+        "Please enter a valid name (only letters, at least 3 characters)";
+      isValid = false;
+    }
+    if (!/^[a-zA-Z0-9._]+@gmail.com$/.test(userData.email)) {
+      errors.email = "Please enter a valid email address";
+      isValid = false;
+    }
+    if (userData.password !== userData.confirmPassword) {
+      errors.confirmPassword = "Passwords do not match";
+      isValid = false;
+    }
 
-    // setError(errors);
-    // if (!isValid) {
-    //   toast.error("Please fix the errors before submitting");
-    // }
+    setError(errors);
+    if (!isValid) {
+      toast.error("Please fix the errors before submitting");
+    }
 
     return isValid;
   };
 
+
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);

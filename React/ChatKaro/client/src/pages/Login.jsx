@@ -1,29 +1,34 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import logo from "../assets/logo.png"
+import logo from "../assets/logo.png";
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const [userData, setUserData] = useState({
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [loginData, setLoginData] = useState({
     email: '',
     password: ''
   });
-  const [isLoading, setIsLoading] = useState(false);
+
 
   const handleChange = (e) => {
-    setUserData({
-      ...userData,
-      [e.target.name]: e.target.value
-    });
+   const {name, value}  = e.target;
+   setLoginData((prev) => ({...prev, [name]: value}))
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    // Add your login logic here
-    setTimeout(() => {
-      setIsLoading(false);
-      console.log('Login submitted:', userData);
-    }, 1000);
+
+    try {
+      const res = await axios.post("/auth/login", loginData);
+
+      sessionStorage.setItem("user", JSON.stringify(res.data.data));
+      
+    } catch (error) {
+      
+    }
   };
 
   return (
@@ -74,7 +79,7 @@ const Login = () => {
               <input
                 type="email"
                 name="email"
-                value={userData.email}
+                value={loginData.email}
                 onChange={handleChange}
                 placeholder="Enter your email"
                 className="input input-bordered w-full focus:input-primary"
@@ -89,7 +94,7 @@ const Login = () => {
               <input
                 type="password"
                 name="password"
-                value={userData.password}
+                value={loginData.password}
                 onChange={handleChange}
                 placeholder="Enter your password"
                 className="input input-bordered w-full focus:input-primary"

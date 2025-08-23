@@ -9,6 +9,8 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Contact from "./pages/Contact";
 import Chat from "./pages/Chat";
+import Profile from './pages/Profile';
+ 
 
 const AppContent = () => {
   const location = useLocation();
@@ -26,6 +28,7 @@ const AppContent = () => {
         <Route path="/signup" element={<Signup/>} />
         <Route path="/contact" element={<Contact/>} />
         <Route path="/chat" element={<Chat/>} />
+        <Route path="/profile" element={<Profile/>}/>
       </Routes>
       
       {!hiddenFooterRoutes.includes(location.pathname) && <Footer />}
