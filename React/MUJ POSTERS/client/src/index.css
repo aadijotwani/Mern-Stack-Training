@@ -1,17 +1,218 @@
 @import "tailwindcss";
 
-/* Custom animations */
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
+/* Dark Poster Theme - Optimized for Performance */
+body {
+  background: linear-gradient(135deg, #111827 0%, #000000 50%, #111827 100%);
+  min-height: 100vh;
+}
+
+/* Image Protection CSS */
+img {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  pointer-events: auto;
+}
+
+/* Disable image save shortcuts */
+img::selection {
+  background: transparent;
+}
+
+img::-moz-selection {
+  background: transparent;
+}
+
+/* Performance Optimization */
+* {
+  /* Enable GPU acceleration for smooth scrolling */
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* Smooth scrolling optimization */
+html {
+  scroll-behavior: smooth;
+  /* Optimize font rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Optimize text rendering */
+  text-rendering: optimizeLegibility;
+}
+
+/* Reduce repaints and reflows */
+body {
+  /* Prevent layout shifts during loading */
+  overflow-x: hidden;
+  /* Optimize scrolling performance */
+  overscroll-behavior: none;
+  /* Improve scroll performance on mobile */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Optimize animations for 60fps */
+.transition-transform,
+.hover\\:scale-105,
+.hover\\:scale-110 {
+  /* Use GPU for transforms */
+  will-change: transform;
+  /* Optimize animation performance */
+  transform: translateZ(0);
+  /* Reduce animation jank */
+  backface-visibility: hidden;
+  /* Optimize perspective */
+  perspective: 1000px;
+}
+
+/* Optimize image rendering */
+img {
+  /* Prevent layout shifts */
+  max-width: 100%;
+  height: auto;
+  /* Optimize image rendering */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: optimizeQuality;
+  /* Force hardware acceleration */
+  transform: translateZ(0);
+}
+
+/* Optimize backdrop-blur performance */
+.backdrop-blur-sm,
+.backdrop-blur-md {
+  /* Reduce blur for better performance */
+  backdrop-filter: blur(4px);
+  /* Force GPU layer */
+  will-change: backdrop-filter;
+  /* Optimize rendering */
+  transform: translateZ(0);
+}
+
+/* Remove heavy backdrop-blur effects */
+.backdrop-blur-lg,
+.backdrop-blur-xl {
+  backdrop-filter: blur(6px);
+}
+
+/* Floating animation keyframes for Hero rectangles */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
   }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
+  25% {
+    transform: translateY(-10px) translateX(5px);
+  }
+  50% {
+    transform: translateY(-5px) translateX(-3px);
+  }
+  75% {
+    transform: translateY(-15px) translateX(8px);
   }
 }
 
-.animate-fade-in {
-  animation: fade-in 1s ease-out forwards;
+/* Create separate floating animations that can work with rotation */
+.float-1 {
+  animation: float1 6s ease-in-out infinite;
+}
+.float-2 {
+  animation: float2 8s ease-in-out infinite 1s;
+}
+.float-3 {
+  animation: float3 7s ease-in-out infinite 2s;
+}
+.float-4 {
+  animation: float4 9s ease-in-out infinite 3s;
+}
+
+@keyframes float1 {
+  0%, 100% { transform: translateY(0px) translateX(0px) var(--rotation); }
+  25% { transform: translateY(-8px) translateX(4px) var(--rotation); }
+  50% { transform: translateY(-4px) translateX(-2px) var(--rotation); }
+  75% { transform: translateY(-12px) translateX(6px) var(--rotation); }
+}
+
+@keyframes float2 {
+  0%, 100% { transform: translateY(0px) translateX(0px) var(--rotation); }
+  25% { transform: translateY(-10px) translateX(-3px) var(--rotation); }
+  50% { transform: translateY(-6px) translateX(5px) var(--rotation); }
+  75% { transform: translateY(-14px) translateX(-7px) var(--rotation); }
+}
+
+@keyframes float3 {
+  0%, 100% { transform: translateY(0px) translateX(0px) var(--rotation); }
+  25% { transform: translateY(-12px) translateX(7px) var(--rotation); }
+  50% { transform: translateY(-3px) translateX(-4px) var(--rotation); }
+  75% { transform: translateY(-9px) translateX(8px) var(--rotation); }
+}
+
+@keyframes float4 {
+  0%, 100% { transform: translateY(0px) translateX(0px) var(--rotation); }
+  25% { transform: translateY(-7px) translateX(-5px) var(--rotation); }
+  50% { transform: translateY(-11px) translateX(3px) var(--rotation); }
+  75% { transform: translateY(-5px) translateX(-8px) var(--rotation); }
+}
+
+/* Toast Animation */
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.3s ease-out;
+}
+
+/* Responsive Utilities */
+@layer utilities {
+  .line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+  
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+}
+
+/* Mobile optimizations */
+@media screen and (max-width: 768px) {
+  /* Prevent zoom on input focus */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea,
+  select {
+    font-size: 16px;
+  }
+  
+  /* Optimize touch targets */
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
 }
