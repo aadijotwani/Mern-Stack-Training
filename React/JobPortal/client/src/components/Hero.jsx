@@ -10,6 +10,8 @@ const Hero = () => {
             startup jobs
           </span>
 
+          
+
           <div className="w-[85%] flex justify-between bg-white rounded-2xl">
             <div>
               <label htmlFor="keyword"></label>
