@@ -1,6 +1,6 @@
 import mongoose, { mongo } from "mongoose";
 import bcrypt from "bcryptjs";
-import Admin from "../models/adminModel.js";
+import Admin from "../models/AdminModel.js";
 import dotenv from "dotenv";
 import connectDB from "../config/db.js";
 
