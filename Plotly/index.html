@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive 3D Scatter Plot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            margin: 0 auto;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .header h1 {
+            margin-bottom: 15px;
+            font-size: 36px;
+        }
+        .header p {
+            opacity: 0.9;
+            line-height: 1.8;
+            font-size: 18px;
+        }
+        .controls {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .input-section {
+            margin-bottom: 20px;
+        }
+        .input-section h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .input-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: flex-end;
+        }
+        .input-field {
+            flex: 1;
+            min-width: 200px;
+        }
+        .input-field label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .input-field input {
+            width: 100%;
+            padding: 18px 20px;
+            border: 3px solid #ddd;
+            border-radius: 8px;
+            font-size: 20px;
+            transition: border-color 0.3s;
+        }
+        .input-field input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .button-group {
+            display: flex;
+            gap: 15px;
+        }
+        button {
+            padding: 18px 40px;
+            font-size: 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+            min-width: 150px;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        #addPoint {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        #connectPoints {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+        }
+        #resetPlot {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        .instructions {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #2196F3;
+        }
+        .instructions h4 {
+            color: #1976D2;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        .instructions ol {
+            margin-left: 20px;
+            color: #555;
+            line-height: 2;
+            font-size: 16px;
+        }
+        #myDiv {
+            width: 100%;
+            height: calc(100vh - 380px);
+            min-height: 600px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .point-count {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 18px;
+            color: #666;
+            font-weight: bold;
+        }
+        .plane-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+        .plane-section h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .plane-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .plane-toggle button {
+            width: 100%;
+        }
+        #togglePlane {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+        }
+        .plane-options {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .plane-option {
+            flex: 1;
+            min-width: 250px;
+        }
+        .plane-option label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .plane-option select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            background: white;
+            cursor: pointer;
+        }
+        .plane-option input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+            cursor: pointer;
+        }
+        .plane-option input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+        }
+        .plane-option input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+            border: none;
+        }
+        #planeValue {
+            color: #667eea;
+            font-size: 18px;
+        }
+        .line-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+        .line-section h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+        .section-description {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .line-controls {
+            display: flex;
+            gap: 20px;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+        .line-option {
+            flex: 1;
+            min-width: 250px;
+        }
+        .line-option label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .line-option select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            background: white;
+            cursor: pointer;
+        }
+        .line-toggle button {
+            min-width: 250px;
+        }
+        #applySortedLines {
+            background: linear-gradient(135deg, #fc466b 0%, #3f5efb 100%);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Interactive 3D Scatter Plot Visualizer</h1>
+            <p>Learn 3D coordinate geometry by plotting points in three-dimensional space. Enter X, Y, and Z coordinates to visualize points in 3D!</p>
+        </div>
+        
+        <div class="controls">
+            <div class="input-section">
+                <h3>Add a New Point</h3>
+                <div class="input-group">
+                    <div class="input-field">
+                        <label for="xValue">X Coordinate</label>
+                        <input type="number" id="xValue" placeholder="Enter X value" step="any">
+                    </div>
+                    <div class="input-field">
+                        <label for="yValue">Y Coordinate</label>
+                        <input type="number" id="yValue" placeholder="Enter Y value" step="any">
+                    </div>
+                    <div class="input-field">
+                        <label for="zValue">Z Coordinate</label>
+                        <input type="number" id="zValue" placeholder="Enter Z value" step="any">
+                    </div>
+                    <div class="button-group">
+                        <button id="addPoint">➕ Add Point</button>
+                        <button id="connectPoints">🔗 Connect Points</button>
+                        <button id="resetPlot">🔄 Reset All</button>
+                    </div>
+                </div>
+                <div class="point-count" id="pointCount">Points plotted: 0</div>
+            </div>
+            
+            <div class="plane-section">
+                <h3>📐 Movable Plane</h3>
+                <div class="plane-controls">
+                    <div class="plane-toggle">
+                        <button id="togglePlane">✨ Show Plane</button>
+                    </div>
+                    <div class="plane-options">
+                        <div class="plane-option">
+                            <label>Plane Orientation:</label>
+                            <select id="planeOrientation">
+                                <option value="xy">XY Plane (perpendicular to Z)</option>
+                                <option value="xz">XZ Plane (perpendicular to Y)</option>
+                                <option value="yz">YZ Plane (perpendicular to X)</option>
+                            </select>
+                        </div>
+                        <div class="plane-option">
+                            <label id="planeLabel">Plane Position (Z): <span id="planeValue">25</span></label>
+                            <input type="range" id="planePosition" min="0" max="50" value="25" step="0.1">
+                        </div>
+                        <div class="plane-option">
+                            <label>Go to Position:</label>
+                            <div style="display: flex; gap: 10px; align-items: center;">
+                                <input type="number" id="planeTargetValue" placeholder="Enter position" style="flex: 1; padding: 12px; border: 2px solid #ddd; border-radius: 6px; font-size: 16px;" step="0.1">
+                                <button id="movePlaneToValue" style="padding: 12px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold;">➡️ Move</button>
+                                <button id="resetPlaneToZero" style="padding: 12px 20px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold;">🔄 Reset to 0</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="line-section">
+                <h3>📊 Sorted Line Connection</h3>
+                <p class="section-description">Connect points with lines sorted by a specific axis (points will be reordered based on selected axis values)</p>
+                <div class="line-controls">
+                    <div class="line-option">
+                        <label>Sort and Connect by Axis:</label>
+                        <select id="sortAxis">
+                            <option value="none">No Sorting (Original Order)</option>
+                            <option value="x">X Axis (Ascending)</option>
+                            <option value="y">Y Axis (Ascending)</option>
+                            <option value="z">Z Axis (Ascending)</option>
+                        </select>
+                    </div>
+                    <div class="line-toggle">
+                        <button id="applySortedLines">🔗 Apply Sorted Connection</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="myDiv"></div>
+    </div>
+
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
