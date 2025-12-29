@@ -31,12 +31,6 @@ const Navbar = () => {
               <div></div>
             ) : (
               <>
-                <Link
-                  to={user.role === 'admin' ? '/admin/dashboard' : '/teacher/dashboard'}
-                  className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors"
-                >
-                  Dashboard
-                </Link>
                 <div className="px-4 py-2 bg-gray-100 rounded-lg">
                   <span className="text-sm font-medium text-gray-700">
                     {user.fullName}

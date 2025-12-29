@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast';
-import TeacherModal from "./TeacherModal.jsx";
 import api from "../../config/api.jsx";
 import { useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
@@ -15,7 +14,6 @@ const Dashboard = () => {
     totalResponses: 0,
   });
 
-  const [isTeacherModalOpen, setIsTeacherModalOpen] = useState(false);
   const [forms, setForms] = useState([]);
 
   const fetchForms = async () => {
@@ -152,10 +150,10 @@ const Dashboard = () => {
             Create New Form
           </button>
           <button
-            onClick={() => setIsTeacherModalOpen(true)}
+            onClick={() => navigate('/admin/manage-teachers')}
             className="px-6 py-3 bg-green-700 text-white font-medium rounded hover:bg-green-800 text-center"
           >
-            Add Teacher
+            Manage Teachers
           </button>
         </div>
 
@@ -264,12 +262,6 @@ const Dashboard = () => {
             </table>
           </div>
         </div>
-
-        {/* Add Teacher Modal */}
-        <TeacherModal
-          isOpen={isTeacherModalOpen}
-          onClose={() => setIsTeacherModalOpen(false)}
-        />
       </div>
     </div>
   );

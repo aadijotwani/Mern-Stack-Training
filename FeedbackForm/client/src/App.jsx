@@ -9,6 +9,7 @@ import Login from './pages/admin/Login.jsx'
 import Dashboard from './pages/admin/Dashboard.jsx'
 import CreateForm from './pages/admin/CreateForms.jsx'
 import EditForm from './pages/admin/EditForm.jsx'
+import ManageTeachers from './pages/admin/ManageTeachers.jsx'
 import FillForm from "./pages/student/FillForm.jsx";
 import ViewForm from './pages/admin/ViewForm.jsx'
 import ViewResponses from './pages/admin/ViewResponses.jsx'
@@ -42,6 +43,11 @@ const App = () => {
       <Route path="/admin/edit-form/:id" element={
         <ProtectedRoute allowedRoles={['admin']}>
           <EditForm />
+        </ProtectedRoute>
+      } />
+      <Route path="/admin/manage-teachers" element={
+        <ProtectedRoute allowedRoles={['admin']}>
+          <ManageTeachers />
         </ProtectedRoute>
       } />
       <Route path="/admin/forms/:id" element={

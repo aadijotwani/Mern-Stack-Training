@@ -20,6 +20,13 @@ export const Login = async (req, res, next) => {
       return next(error);
     }
 
+    // Check if user is active
+    if (!admin.isActive) {
+      const error = new Error("Your account has been deactivated. Please contact an administrator.");
+      error.statusCode = 403;
+      return next(error);
+    }
+
     const isVerified = await bcrypt.compare(password, admin.password);
     if (!isVerified) {
       const error = new Error("Invalid Credentials");
@@ -88,11 +95,74 @@ export const createTeacher = async (req, res, next) => {
 
 export const getAllTeachers = async (req, res, next) => {
   try {
-    const teachers = await Admin.find({ role: "teacher" }).select('_id fullName email');
+    const teachers = await Admin.find({ role: "teacher" }).select('_id fullName email isActive');
     
     res.status(200).json({
       message: "Teachers fetched successfully",
       data: teachers
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const toggleTeacherStatus = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    
+    const teacher = await Admin.findById(id);
+    if (!teacher || teacher.role !== "teacher") {
+      return res.status(404).json({ message: "Teacher not found" });
+    }
+    
+    teacher.isActive = !teacher.isActive;
+    await teacher.save();
+    
+    res.status(200).json({
+      message: `Teacher ${teacher.isActive ? 'activated' : 'deactivated'} successfully`,
+      data: teacher
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const updateTeacher = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { fullName, email, password } = req.body;
+    
+    const teacher = await Admin.findById(id);
+    if (!teacher || teacher.role !== "teacher") {
+      return res.status(404).json({ message: "Teacher not found" });
+    }
+    
+    // Check if email is being changed and if it already exists
+    if (email && email !== teacher.email) {
+      const exists = await Admin.findOne({ email, _id: { $ne: id } });
+      if (exists) {
+        return res.status(400).json({ message: "Email already in use" });
+      }
+      teacher.email = email;
+    }
+    
+    if (fullName) teacher.fullName = fullName;
+    
+    if (password) {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      teacher.password = hashedPassword;
+    }
+    
+    await teacher.save();
+    
+    res.status(200).json({
+      message: "Teacher updated successfully",
+      data: {
+        _id: teacher._id,
+        fullName: teacher.fullName,
+        email: teacher.email,
+        isActive: teacher.isActive
+      }
     });
   } catch (error) {
     next(error);

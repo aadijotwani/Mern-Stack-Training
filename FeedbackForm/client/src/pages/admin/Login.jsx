@@ -34,7 +34,6 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", loginData);
     try {
       const res = await axios.post("/auth/login", loginData);
       toast.success(res.data.message);
