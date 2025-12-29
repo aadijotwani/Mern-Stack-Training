@@ -109,7 +109,7 @@ const ViewForm = () => {
                   </div>
 
                   {/* Options (if applicable) */}
-                  {question.options && question.options.length > 0 && (
+                  {question.options && question.options.length > 1 && (
                     <div className="mt-4">
                       <p className="text-sm font-medium text-gray-700 mb-2">Options:</p>
                       <ul className="list-disc list-inside space-y-1">
