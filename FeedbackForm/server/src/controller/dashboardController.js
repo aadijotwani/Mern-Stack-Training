@@ -5,16 +5,16 @@ export const getDashboardStats = async (req, res, next) => {
   try {
     let formFilter = {};
     
-    // If user is a teacher, only show their own forms
+    // If user is a teacher, only show forms assigned to them
     if (req.user.role === "teacher") {
-      formFilter.createdBy = req.user._id;
+      formFilter.assignedTo = req.user._id;
     }
     
     const totalForms = await Form.countDocuments(formFilter);
 
     const activeForms = await Form.countDocuments({
       ...formFilter,
-      status: "Active"
+      isActive: true
     });
 
     // Get form IDs for the teacher to count only their responses

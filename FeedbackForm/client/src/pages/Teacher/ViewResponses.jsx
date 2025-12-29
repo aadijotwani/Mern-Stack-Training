@@ -5,19 +5,36 @@ import api from '../../config/api';
 const ViewResponses = () => {
   const { formId } = useParams();
   const [responses, setResponses] = useState([]);
+  const [allResponses, setAllResponses] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [fromDate, setFromDate] = useState('');
-  const [toDate, setToDate] = useState('');
+  const [batchFilter, setBatchFilter] = useState('');
+  const [formBatch, setFormBatch] = useState('');
 
-  const fetchResponses = async () => {
+  const fetchResponses = async (resetFilters = false) => {
     try {
       setLoading(true);
-      const params = {};
-      if (fromDate) params.fromDate = fromDate;
-      if (toDate) params.toDate = toDate;
+      
+      // Reset batch filter if requested
+      if (resetFilters) {
+        setBatchFilter('');
+      }
 
-      const res = await api.get(`/responses/${formId}/responses`, { params });
-      setResponses(res.data.data);
+      const res = await api.get(`/responses/${formId}/responses`);
+      const data = res.data.data;
+      
+      setAllResponses(data);
+      
+      // Get batch from form
+      if (data.length > 0 && data[0].form) {
+        setFormBatch(data[0].form.batch || '');
+      }
+      
+      // Apply batch filter
+      if (resetFilters || !batchFilter) {
+        setResponses(data);
+      } else {
+        setResponses(data);
+      }
     } catch (error) {
       console.error("Error fetching responses", error);
     } finally {
@@ -27,7 +44,7 @@ const ViewResponses = () => {
 
   useEffect(() => {
     fetchResponses();
-  }, [formId, fromDate, toDate]);
+  }, [formId]);
 
   const exportToCSV = () => {
     if (responses.length === 0) {
@@ -36,7 +53,7 @@ const ViewResponses = () => {
     }
 
     // Prepare CSV headers
-    const headers = ['Student Name', 'Submission Date', 'Submission Time'];
+    const headers = ['Student Name', 'Batch', 'Submission Date', 'Submission Time'];
     
     // Get questions from the first response's form
     if (responses[0].form && responses[0].form.questions) {
@@ -54,6 +71,7 @@ const ViewResponses = () => {
     const rows = responses.map(response => {
       const row = [
         response.studentName,
+        response.batch || 'N/A',
         new Date(response.submittedAt).toLocaleDateString(),
         new Date(response.submittedAt).toLocaleTimeString()
       ];
@@ -113,33 +131,52 @@ const ViewResponses = () => {
         {/* Header */}
         <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-6 mb-6">
           <h1 className="text-3xl font-bold text-gray-900 mb-4">Form Responses</h1>
-
-          {/* Date Filters */}
-          <div className="flex flex-col sm:flex-row gap-4">
-            <div className="flex-1">
-              <label htmlFor="fromDate" className="block text-sm font-medium text-gray-700 mb-2">
-                From Date
-              </label>
-              <input
-                type="date"
-                id="fromDate"
-                value={fromDate}
-                onChange={(e) => setFromDate(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent"
-              />
+          
+          {/* Batch Filter */}
+          <div className="space-y-3">
+            <label className="block text-sm font-medium text-gray-700">
+              Filter by Batch
+            </label>
+            <div className="flex flex-wrap gap-2 items-center">
+              <select
+                onChange={(e) => {
+                  if (e.target.value && !selectedBatches.includes(e.target.value)) {
+                    handleBatchToggle(e.target.value);
+                  }
+                  e.target.value = '';
+                }}
+                className="px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent"
+              >
+                <option value="">Select batch...</option>
+                {availableBatches.map((batch) => (
+                  <option key={batch} value={batch} disabled={selectedBatches.includes(batch)}>
+                    {batch}
+                  </option>
+                ))}
+              </select>
             </div>
-            <div className="flex-1">
-              <label htmlFor="toDate" className="block text-sm font-medium text-gray-700 mb-2">
-                To Date
-              </label>
-              <input
-                type="date"
-                id="toDate"
-                value={toDate}
-                onChange={(e) => setToDate(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent"
-              />
-            </div>
+            
+            {/* Selected Batches Tags */}
+            {selectedBatches.length > 0 && (
+              <div className="flex flex-wrap gap-2 mt-3">
+                {selectedBatches.map((batch) => (
+                  <div
+                    key={batch}
+                    className="flex items-center gap-2 px-3 py-1.5 bg-blue-100 text-blue-800 rounded-full text-sm font-medium"
+                  >
+                    <span>{batch}</span>
+                    <button
+                      onClick={() => removeBatch(batch)}
+                      className="hover:text-blue-900"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
@@ -148,14 +185,22 @@ const ViewResponses = () => {
           <p className="text-lg font-medium text-gray-900">
             Total Responses: {responses.length}
           </p>
-          {responses.length > 0 && (
+          <div className="flex gap-3">
             <button
-              onClick={exportToCSV}
-              className="px-6 py-2 bg-green-700 text-white font-medium rounded hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-green-700 focus:ring-offset-2"
+              onClick={() => fetchResponses(true)}
+              className="px-6 py-2 bg-blue-700 text-white font-medium rounded hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2"
             >
-              Export to Google Sheets
+              🔄 Refresh
             </button>
-          )}
+            {responses.length > 0 && (
+              <button
+                onClick={exportToCSV}
+                className="px-6 py-2 bg-green-700 text-white font-medium rounded hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-green-700 focus:ring-offset-2"
+              >
+                Export to Excel
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Responses List */}

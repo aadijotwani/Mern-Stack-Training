@@ -48,9 +48,20 @@ const formSchema = new mongoose.Schema(
       required: true
     },
 
+    assignedTo: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Admin",
+      required: true
+    },
+
     questions: {
       type: [questionSchema],
       required: true
+    },
+
+    allowedBatches: {
+      type: [String],
+      default: []
     },
 
     isActive: {

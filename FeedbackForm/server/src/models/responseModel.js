@@ -29,6 +29,12 @@ const responseSchema = new mongoose.Schema(
       trim: true
     },
 
+    batch: {
+      type: String,
+      required: true,
+      trim: true
+    },
+
     studentEmail: {
       type: String,
       trim: true

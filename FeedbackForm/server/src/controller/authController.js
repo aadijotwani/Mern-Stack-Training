@@ -85,3 +85,16 @@ export const createTeacher = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getAllTeachers = async (req, res, next) => {
+  try {
+    const teachers = await Admin.find({ role: "teacher" }).select('_id fullName email');
+    
+    res.status(200).json({
+      message: "Teachers fetched successfully",
+      data: teachers
+    });
+  } catch (error) {
+    next(error);
+  }
+};

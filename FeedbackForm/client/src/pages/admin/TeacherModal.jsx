@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
-import api from '../../config/api';
+import api from '../../config/api.jsx';
 
 const TeacherModal = ({ isOpen, onClose }) => {
   const [teacherData, setTeacherData] = useState({

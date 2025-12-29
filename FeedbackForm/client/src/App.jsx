@@ -7,6 +7,8 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Home from './pages/Home.jsx'
 import Login from './pages/admin/Login.jsx'
 import Dashboard from './pages/admin/Dashboard.jsx'
+import CreateForm from './pages/admin/CreateForms.jsx'
+import EditForm from './pages/admin/EditForm.jsx'
 import FillForm from "./pages/student/FillForm.jsx";
 import ViewForm from './pages/admin/ViewForm.jsx'
 import ViewResponses from './pages/admin/ViewResponses.jsx'
@@ -23,13 +25,23 @@ const App = () => {
     <Toaster position="top-center" />
     <Navbar />    
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Login />} />
       <Route path="/login" element={<Login />} />
       
       {/* Admin Routes */}
       <Route path="/admin/dashboard" element={
         <ProtectedRoute allowedRoles={['admin']}>
           <Dashboard />
+        </ProtectedRoute>
+      } />
+      <Route path="/admin/create-form" element={
+        <ProtectedRoute allowedRoles={['admin']}>
+          <CreateForm />
+        </ProtectedRoute>
+      } />
+      <Route path="/admin/edit-form/:id" element={
+        <ProtectedRoute allowedRoles={['admin']}>
+          <EditForm />
         </ProtectedRoute>
       } />
       <Route path="/admin/forms/:id" element={

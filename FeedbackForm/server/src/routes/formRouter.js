@@ -3,6 +3,8 @@ import { createForm } from "../controller/formController.js";
 import { getFormById } from "../controller/formController.js";
 import { getAllForms } from "../controller/formController.js";
 import { deleteForm } from "../controller/formController.js";
+import { toggleFormStatus } from "../controller/formController.js";
+import { updateForm } from "../controller/formController.js";
 
 
 import { Protect } from "../middleware/authMiddleware.js";
@@ -15,7 +17,9 @@ const router = express.Router();
 router.post("/", Protect, createForm);
 router.get("/", Protect, getAllForms);
 router.get("/:id", getFormById);
+router.put("/:id", Protect, updateForm);
 router.delete("/:id", Protect, deleteForm);
+router.patch("/:id/toggle-status", Protect, toggleFormStatus);
 
 
 export default router;

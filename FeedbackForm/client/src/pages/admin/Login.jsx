@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../context/AuthContext';
 import axios from '../../config/api.jsx';
+import logo from '../../assets/logo.png';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, user } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -14,6 +15,17 @@ const Login = () => {
     email: "",
     password: "",
   });
+
+  // Redirect if already logged in
+  useEffect(() => {
+    if (user) {
+      if (user.role === "admin") {
+        navigate('/admin/dashboard');
+      } else if (user.role === "teacher") {
+        navigate('/teacher/dashboard');
+      }
+    }
+  }, [user, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -48,17 +60,14 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
       <div className="max-w-md w-full">
-        {/* Institute name */}
-        <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
-          Institute Portal
-        </h1>
+        
 
         {/* Login card */}
-        <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-8">
+        <div className="bg-white border border-gray-200 rounded-xl shadow-lg p-8">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6 text-center">
-            Teacher Login
+            Login
           </h2>
 
           <form onSubmit={handleSubmit} className="space-y-6">
