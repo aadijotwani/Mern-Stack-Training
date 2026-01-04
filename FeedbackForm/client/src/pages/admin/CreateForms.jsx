@@ -13,6 +13,8 @@ const CreateForm = () => {
   const [selectedTeacher, setSelectedTeacher] = useState("");
   const [allowedBatches, setAllowedBatches] = useState([]);
   const [batchInput, setBatchInput] = useState("");
+  const [draggedIndex, setDraggedIndex] = useState(null);
+  const [dragOverIndex, setDragOverIndex] = useState(null);
 
   useEffect(() => {
     fetchTeachers();
@@ -34,6 +36,7 @@ const CreateForm = () => {
       questionText: "",
       type: "short",
       options: [""],
+      maxStars: 5,
       required: false,
     };
     setQuestions([...questions, newQuestion]);
@@ -41,6 +44,46 @@ const CreateForm = () => {
 
   const handleRemoveQuestion = (questionId) => {
     setQuestions(questions.filter((q) => q.id !== questionId));
+  };
+
+  const handleDragStart = (e, index) => {
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/html', index);
+    setDraggedIndex(index);
+  };
+
+  const handleDragOver = (e, index) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    setDragOverIndex(index);
+  };
+
+  const handleDragEnd = () => {
+    setDraggedIndex(null);
+    setDragOverIndex(null);
+  };
+
+  const handleDrop = (e, dropIndex) => {
+    e.preventDefault();
+    const dragIndex = parseInt(e.dataTransfer.getData('text/html'));
+    
+    if (dragIndex === dropIndex) {
+      setDraggedIndex(null);
+      setDragOverIndex(null);
+      return;
+    }
+    
+    const newQuestions = [...questions];
+    const draggedQuestion = newQuestions[dragIndex];
+    
+    // Remove from old position
+    newQuestions.splice(dragIndex, 1);
+    // Insert at new position
+    newQuestions.splice(dropIndex, 0, draggedQuestion);
+    
+    setQuestions(newQuestions);
+    setDraggedIndex(null);
+    setDragOverIndex(null);
   };
 
   const handleQuestionChange = (questionId, field, value) => {
@@ -61,6 +104,11 @@ const CreateForm = () => {
           } else if (!needsOptions && hadOptions) {
             // Switching to a type that doesn't need options
             updated.options = [];
+          }
+
+          // Initialize maxStars for star rating type
+          if (value === "star_rating" && !q.maxStars) {
+            updated.maxStars = 5;
           }
         }
 
@@ -387,13 +435,27 @@ const CreateForm = () => {
                   {questions.map((question, index) => (
                     <div
                       key={question.id}
-                      className="border border-gray-200 rounded p-4 bg-gray-50"
+                      draggable
+                      onDragStart={(e) => handleDragStart(e, index)}
+                      onDragOver={(e) => handleDragOver(e, index)}
+                      onDragEnd={handleDragEnd}
+                      onDrop={(e) => handleDrop(e, index)}
+                      className={`border rounded p-4 transition-all duration-200 ${
+                        draggedIndex === index
+                          ? 'opacity-40 scale-95 border-blue-400 bg-blue-50'
+                          : dragOverIndex === index && draggedIndex !== null
+                          ? 'border-blue-500 border-2 bg-blue-50 shadow-lg scale-105'
+                          : 'border-gray-200 bg-gray-50 hover:border-blue-300'
+                      } cursor-move`}
                     >
                       {/* Question header */}
                       <div className="flex items-start justify-between mb-3">
-                        <span className="text-sm font-medium text-gray-700">
-                          Question {index + 1}
-                        </span>
+                        <div className="flex items-center gap-3">
+                          <span className="text-lg text-gray-400 hover:text-gray-600 transition-colors">⋮⋮</span>
+                          <span className="text-sm font-medium text-gray-700">
+                            Question {index + 1}
+                          </span>
+                        </div>
                         <button
                           type="button"
                           onClick={() => handleRemoveQuestion(question.id)}
@@ -439,6 +501,7 @@ const CreateForm = () => {
                             <option value="mcq">MCQ</option>
                             <option value="checkbox">Checkbox</option>
                             <option value="dropdown">Dropdown</option>
+                            <option value="star_rating">Star Rating</option>
                           </select>
                         </div>
                         <label className="flex items-center gap-2">
@@ -503,6 +566,32 @@ const CreateForm = () => {
                           >
                             + Add Option
                           </button>
+                        </div>
+                      )}
+
+                      {/* Max Stars for Star Rating */}
+                      {question.type === "star_rating" && (
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Maximum Stars
+                          </label>
+                          <select
+                            value={question.maxStars || 5}
+                            onChange={(e) =>
+                              handleQuestionChange(
+                                question.id,
+                                "maxStars",
+                                parseInt(e.target.value)
+                              )
+                            }
+                            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent"
+                          >
+                            {[3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
+                              <option key={num} value={num}>
+                                {num} Stars
+                              </option>
+                            ))}
+                          </select>
                         </div>
                       )}
                     </div>

@@ -15,6 +15,8 @@ const EditForm = () => {
   const [loading, setLoading] = useState(true);
   const [allowedBatches, setAllowedBatches] = useState([]);
   const [batchInput, setBatchInput] = useState("");
+  const [draggedIndex, setDraggedIndex] = useState(null);
+  const [dragOverIndex, setDragOverIndex] = useState(null);
 
   useEffect(() => {
     fetchTeachers();
@@ -57,6 +59,7 @@ const EditForm = () => {
       questionText: "",
       type: "short",
       options: [""],
+      maxStars: 5,
       required: false,
     };
     setQuestions([...questions, newQuestion]);
@@ -64,6 +67,46 @@ const EditForm = () => {
 
   const handleRemoveQuestion = (questionId) => {
     setQuestions(questions.filter((q) => q.id !== questionId));
+  };
+
+  const handleDragStart = (e, index) => {
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/html', index);
+    setDraggedIndex(index);
+  };
+
+  const handleDragOver = (e, index) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    setDragOverIndex(index);
+  };
+
+  const handleDragEnd = () => {
+    setDraggedIndex(null);
+    setDragOverIndex(null);
+  };
+
+  const handleDrop = (e, dropIndex) => {
+    e.preventDefault();
+    const dragIndex = parseInt(e.dataTransfer.getData('text/html'));
+    
+    if (dragIndex === dropIndex) {
+      setDraggedIndex(null);
+      setDragOverIndex(null);
+      return;
+    }
+    
+    const newQuestions = [...questions];
+    const draggedQuestion = newQuestions[dragIndex];
+    
+    // Remove from old position
+    newQuestions.splice(dragIndex, 1);
+    // Insert at new position
+    newQuestions.splice(dropIndex, 0, draggedQuestion);
+    
+    setQuestions(newQuestions);
+    setDraggedIndex(null);
+    setDragOverIndex(null);
   };
 
   const handleQuestionChange = (questionId, field, value) => {
@@ -81,6 +124,11 @@ const EditForm = () => {
             updated.options = ["", ""];
           } else if (!needsOptions && hadOptions) {
             updated.options = [];
+          }
+
+          // Initialize maxStars for star rating type
+          if (value === "star_rating" && !q.maxStars) {
+            updated.maxStars = 5;
           }
         }
 
@@ -398,12 +446,26 @@ const EditForm = () => {
                 {questions.map((question, qIndex) => (
                   <div
                     key={question.id}
-                    className="border border-gray-200 rounded-lg p-6 bg-gray-50"
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, qIndex)}
+                    onDragOver={(e) => handleDragOver(e, qIndex)}
+                    onDragEnd={handleDragEnd}
+                    onDrop={(e) => handleDrop(e, qIndex)}
+                    className={`border rounded-lg p-6 transition-all duration-200 ${
+                      draggedIndex === qIndex
+                        ? 'opacity-40 scale-95 border-blue-400 bg-blue-50'
+                        : dragOverIndex === qIndex && draggedIndex !== null
+                        ? 'border-blue-500 border-2 bg-blue-50 shadow-lg scale-105'
+                        : 'border-gray-200 bg-gray-50 hover:border-blue-300'
+                    } cursor-move`}
                   >
                     <div className="flex justify-between items-start mb-4">
-                      <h3 className="text-lg font-medium text-gray-900">
-                        Question {qIndex + 1}
-                      </h3>
+                      <div className="flex items-center gap-3">
+                        <span className="text-lg text-gray-400 hover:text-gray-600 transition-colors">⋮⋮</span>
+                        <h3 className="text-lg font-medium text-gray-900">
+                          Question {qIndex + 1}
+                        </h3>
+                      </div>
                       <button
                         type="button"
                         onClick={() => handleRemoveQuestion(question.id)}
@@ -450,6 +512,7 @@ const EditForm = () => {
                             <option value="mcq">Multiple Choice</option>
                             <option value="checkbox">Checkbox</option>
                             <option value="dropdown">Dropdown</option>
+                            <option value="star_rating">Star Rating</option>
                           </select>
                         </div>
 
@@ -518,6 +581,32 @@ const EditForm = () => {
                               + Add Option
                             </button>
                           </div>
+                        </div>
+                      )}
+
+                      {/* Max Stars for Star Rating */}
+                      {question.type === "star_rating" && (
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Maximum Stars
+                          </label>
+                          <select
+                            value={question.maxStars || 5}
+                            onChange={(e) =>
+                              handleQuestionChange(
+                                question.id,
+                                "maxStars",
+                                parseInt(e.target.value)
+                              )
+                            }
+                            className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent"
+                          >
+                            {[3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
+                              <option key={num} value={num}>
+                                {num} Stars
+                              </option>
+                            ))}
+                          </select>
                         </div>
                       )}
                     </div>
